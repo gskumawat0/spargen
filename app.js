@@ -13,8 +13,12 @@ var express         = require("express"),
 var User            = require("./models/index");    
 //add routes
 var indexRoutes = require("./routes/index.js");
+
+
+var mongodburl = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v10";
+
 mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/spargen',{ useNewUrlParser: true });
+mongoose.connect(mongodburl,{ useNewUrlParser: true });
 // configure express
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
