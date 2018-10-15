@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+
+<!-- register -->
+	<div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Register Here</h3>
+			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+				deserunt mollit anim id est laborum.</p>
+			<div class="login-form-grids">
+				<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
+				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/register'>
+					<input type="text" placeholder="First Name..." name='firstName' pattern='[a-zA-Z]{1,}' required=" " >
+					<input type="text" placeholder="Last Name..." name='lastName' pattern='[a-zA-Z]{1,}' required=" " >
+					<input type="tel" placeholder="Contact No..." maxlength='10' minlength='10' name='mobile' pattern='[0-9]{10}' required=" " >
+					<input type="email" placeholder="Email Address" name='email' pattern='[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+.[A-Za-z]{2,}' required=" " >
+					<input type="password" placeholder="Password" name='password' required=" " title='password should contains at least 8 character and also have one capital and small alphabet, one number, one special character'>
+					<input type="password" placeholder="Password Confirmation" required=" " >
+					<div class="register-check-box">
+						<div class="check">
+							<label class="checkbox"><input type="checkbox" name="newsConsent" clicked><i> </i>Subscribe to Newsletter</label>
+							<label class="checkbox"><input type="checkbox" name="termsConsent" clicked><i> </i>I accept the terms and conditions</label>
+						</div>
+					</div>
+					<input type="submit" value="Register">
+				</form>
+			</div>
+			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+				<a href="/">Home</a>
+			</div>
+		</div>
+	</div>
+<!-- //register -->
+<% include ../partials/footer %>

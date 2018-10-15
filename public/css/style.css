@@ -918,7 +918,7 @@ p.est{
 /*-- footer --*/
 .footer{
 	background:#2E2E2E;
-	padding:3em 0;
+	padding:3em 0 0;
 }
 .footer-grid h3{
 	font-size:2em;
@@ -1966,6 +1966,9 @@ label.radio {
 .add-review input[type="email"]{
 	margin-left:1em;
 }
+input:invalid {
+	outline: 2px solid red;
+}
 .add-review textarea{
 	width:100% !important;
 	min-height:150px;
@@ -2041,7 +2044,7 @@ label.radio {
 	background:#F7F7F9;
 	margin:3em auto 0;
 }
-.login-form-grids input[type="email"],.login-form-grids input[type="password"],.login-form-grids input[type="text"]{
+.login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"]{
 	outline: none;
     border: 1px solid #DBDBDB;
     padding: 10px 10px 10px 45px;
@@ -2134,11 +2137,15 @@ label.radio {
 	background:url(../images/img-sp.png) no-repeat 0px -298px #fff;
 	margin:1em 0;
 }
+.login-form-grids input[type="tel"]{
+	background:url(../images/img-sp.png) no-repeat 0px -298px #fff;
+	margin:1em 0 1em;
+}
 .register-check-box label{
 	font-size:14px;
 	font-weight:500;
 	color:#999;
-	margin: 1.5em 0 0 0em;
+	margin: 1.5em 0 1.5em 0em;
 }
 .checkbox {
     position: relative;
