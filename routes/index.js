@@ -1,44 +1,49 @@
-var express = require("express"),
-    router  = express.Router(),
-    passport = require("passport");
+const express = require("express"),
+    router    = express.Router(),
+    crypto    = require("crypto"),
+    async     = require("async"),
+    nodemailer= require("nodemailer"), 
+    passport  = require("passport");
 
 //require model
-var User = require("../models/index.js");
+const User = require("../models/index.js");
+
+//index route
+router.get('/',function (req,res) {
+    res.render("index");
+});
 
 //register routes
 router.get("/register",function(req, res) {
+    req.flash('error','please signup first');
     res.render('auth/register');
 });
 
 router.post('/register',function(req,res){
     //fetch user info
-    var firstName=req.body.firstName,
+    let firstName=req.body.firstName,
         lastName = req.body.lastName,
         mobile= req.body.mobile,
-        email = req.body.email,
+        username = req.body.username,
         password = req.body.password,
         newsConsent = req.body.newsConsent;
-        
-    var userInfo = {firstName: firstName, lastName: lastName, mobile: mobile, email:email, newsConsent: newsConsent };
+    
+    let userInfo = new  User({firstName: firstName, lastName: lastName, mobile: mobile, username:username, newsConsent: newsConsent });
     
     //register and create user
-    User.register(new User(userInfo), password, function(error, userCreated)
+    User.register(userInfo, password, function(error, userCreated)
      {
          if (error)
          {
-            console.log(error);    
-            //  req.flash("error", error.message);
-             return res.render("auth/register");
+             req.flash("error", error.name +", " + error.message);
+             return res.redirect("/register");
          }
          else
          {
-             req.login(userCreated, function(err) {
-              if (err) {
-                console.log(err);
-                return next(err);
-              }
-              console.log(userCreated);
-              return res.redirect('/');
+            passport.authenticate("local")(req, res, function()
+            {
+                req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
+                res.redirect("/");
             });
          }
      });
@@ -49,48 +54,178 @@ router.get('/login',function(req, res) {
     res.render('auth/login');
 });
 
-router.post("/login", passport.authenticate("local", 
+router.post('/login',
+    passport.authenticate('local',
     {
-        successRedirect: "/",
-        failureRedirect: "/register"
-    }), function(req, res){
-        console.log(req.body);
-});
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: 'Invalid username or password.',
+        successFlash: 'Welcome!'
+    })
+);
 
 router.get('/logout',function(req, res) {
     req.logout();
     req.flash("success", "successfully logged out");
-    res.redirect("/products"); 
+    res.redirect("/"); 
 });
 
-router.get('/forget',function(req,res){
-   res.render('auth/forget'); 
+// forgot password
+router.get('/forgot', function(req, res) {
+  res.render('auth/forgot');
 });
 
-router.post('/forget', function(req,res){
-    var email = req.body.email ;    
-    var token = function(){
-        var str = '';
-        for(var i = 0; i< 6; i++){
-        str += Math.floor(Math.random() * 10);
-        return str;
-    }};
-    
-    //mail this token to user
-    res.redirect('/reset');
+router.post('/forgot', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ username : req.body.username}, function(err, user) {
+        if(err){
+           req.flash('error', err.message);
+           return res.redirect('/forgot'); 
+        }
+        if (!user) {
+          req.flash('error', 'No account with email '+ req.body.username +'address exists.');
+          return res.redirect('/forgot');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 600000; // 10 minutes
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      let smtpTransport = nodemailer.createTransport(
+        {
+            host: 'smtp.stackmail.com',
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth:
+            {
+                user: 'gs@nintia.in', // sender account
+                pass: 'gsK@w3b95' //  account key
+            }
+        });
+      var mailOptions = {
+        to: user.username,
+        from: 'gs@nintia.in',
+        subject: 'Spargen Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'https://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        + 'this token is valid for 10 minutes. \n\n'
+        + 'Team Spargen'
+          
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        req.flash('success', 'An e-mail has been sent to ' + user.username + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
 });
 
-router.get('/reset',function(req, res) {
-    res.render('auth/resetPass');
+router.get('/reset/:token', function(req, res) {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if(err){
+        req.flash('error', err.message);
+        return res.redirect('/forgot');
+    }
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    res.render('auth/reset', {token: req.params.token});
+  });
 });
 
-router.post('/reset',function(req, res) {
-   var resetCode = req.body.resetCode ,
-        newPasssword = req.body.newPasssword ;
+router.post('/reset/:token', function(req, res) {
+  async.waterfall([
+    function(done) {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if(err){
+                req.flash('error', err.message);
+                return res.redirect('/forgot');
+            }
+        if (!user) {
+          req.flash('error', 'Password reset token is invalid or has expired.');
+          return res.redirect('back');
+        }
+        if(req.body.newPassword === req.body.confirmNewPassword) {
+          user.setPassword(req.body.newPassword, function(err) {
+            if(err){
+                    req.flash('error', err.message);
+                    return res.redirect('/forgot');
+                }
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+                if(err){
+                        req.flash('error', err.message);
+                        return res.redirect('/forgot');
+                    }
+              req.logIn(user, function(err) {
+                done(err, user);
+              });
+            });
+          });
+        } else {
+            req.flash("error", "Passwords do not match.");
+            return res.redirect('back');
+        }
+      });
+    },
+    function(user, done) {
+     let transporter = nodemailer.createTransport(
+            {
+                host: 'smtp.stackmail.com',
+                port: 465,
+                secure: true, // true for 465, false for other ports
+                auth:
+                {
+                    user: 'gs@nintia.in', // generated ethereal user
+                    pass: 'gsK@w3b95' // generated ethereal password
+                }
+            });
+      var mailOptions = {
+        to: user.username,
+        from: 'gs@nintia.in',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.username + ' has just been changed.\n'
+         + 'if this is not done by you, please report to admin at spargen.official@gmail.com'
         
-        // authenticate that token is associated with given mail id
-        //update the password
+        + '\n Team Spargen'          
+      };
+      transporter.sendMail(mailOptions, function(err) {
+        req.flash('success', 'Success! Your password has been changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+      if(err){
+          req.flash('error',err.message);
+          res.redirect('/');
+      }
+    res.redirect('/');
+  });
 });
+
+
+
 
 module.exports = router ;
 

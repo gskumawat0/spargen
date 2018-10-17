@@ -1,6 +1,5 @@
-
+/*  global $ */
 $(document).ready(function(){
-
 
 	/* ---- Countdown timer ---- */
 

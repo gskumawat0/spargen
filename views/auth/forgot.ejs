@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<!-- register -->
+	<div class="register">
+		<div class="container">
+			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Forgot Password</h3>
+			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+				deserunt mollit anim id est laborum.</p>
+			<div class="login-form-grids">
+				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/forgot' >
+					<input type="email" placeholder="Email Address" name='username' required='' >
+					<input type="submit" value="Reset Password">
+					<a href='/login'>Remember your password. Go back</a>   
+				</form>
+			</div>
+			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+				<a href="/">Home</a>
+			</div>
+		</div>
+	</div>
+<!-- //register -->
+<% include ../partials/footer %>

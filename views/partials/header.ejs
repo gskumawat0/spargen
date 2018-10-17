@@ -11,6 +11,7 @@
 <!-- //for-mobile-apps -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href='images/spargen-logo.jpg' rel='icon'>
 <!-- js -->
 <script src="js/jquery.min.js"></script>
 <!-- //js -->
@@ -35,6 +36,14 @@
 </head>
 	
 <body>
+	<div class='container' style='margin-bottom: 0;'>
+		<% if(error && error.length > 0){ %>
+			<div class='alert alert-danger' role='alert'> <%= error %></div>
+		<% } %>
+		<% if(success && success.length > 0) { %>
+		<div class='alert alert-success' role='alert'> <%= success %></div>
+		<% } %>
+	</div>	
 <!-- header -->
 	<div class="header">
 		<div class="container">
@@ -47,7 +56,7 @@
 	                    	<li><a href="/register"><i class="glyphicon glyphicon-book" aria-hidden="true"></i>Register</a></li>
 	                        <li><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>Login</a></li>
 	                    <% } else { %>
-	                        <li><a href="/profile"><%= currentUser.email %></a></li>
+	                        <li><a href="/profile"><%= currentUser.username %></a></li>
 	                        <li><a href="/logout">Logout</a></li>
 	                    <% } %>
 					</ul>
@@ -63,7 +72,7 @@
 			</div>
 			<div class="logo-nav">
 				<div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">
-					<h1><a href="/">Best Store <span>Shop anywhere</span></a></h1>
+					<h1><a href="/">SparGen <span>Best Deals</span></a></h1>
 				</div>
 				<div class="logo-nav-left1">
 					<nav class="navbar navbar-default">
@@ -159,7 +168,7 @@
 								</ul>
 							</li>
 							<li><a href="short-codes.html">Short Codes</a></li>
-							<li><a href="mail.html">Mail Us</a></li>
+							<li><a href="mail.html">Contact Us</a></li>
 						</ul>
 					</div>
 					</nav>
