@@ -15,8 +15,11 @@ router.get('/',function (req,res) {
 
 //register routes
 router.get("/register",function(req, res) {
-    req.flash('error','please signup first');
     res.render('auth/register');
+});
+
+router.get('/sgadmin',function(req, res) {
+    res.render('auth/admin');
 });
 
 router.post('/register',function(req,res){
@@ -29,7 +32,9 @@ router.post('/register',function(req,res){
         newsConsent = req.body.newsConsent;
     
     let userInfo = new  User({firstName: firstName, lastName: lastName, mobile: mobile, username:username, newsConsent: newsConsent });
-    
+      if(req.body.adminCode ==='secret123'){
+        userInfo.isAdmin = true;
+      }
     //register and create user
     User.register(userInfo, password, function(error, userCreated)
      {
@@ -42,7 +47,53 @@ router.post('/register',function(req,res){
          {
             passport.authenticate("local")(req, res, function()
             {
+               let transporter = nodemailer.createTransport(
+                    {
+                        host: 'smtp.stackmail.com',
+                        port: 465,
+                        secure: true, // true for 465, false for other ports
+                        auth:
+                        {
+                            user: 'gs@nintia.in', // generated ethereal user
+                            pass: 'gsK@w3b95' // generated ethereal password
+                        }
+                    });
+              var mailOptions = {
+                to: userCreated.username,
+                from: 'gs@nintia.in',
+                subject: 'welcome to spargen',
+                text: 'Hello ' + userCreated.firstName +" " + userCreated.lastName +'\n\n' +
+                  'thanks for register with Spargen' +
+                  " let's  make this journey memorable \n "
+                + '\n Team Spargen'          
+              };
+              transporter.sendMail(mailOptions, function(err) {
+                if(err){
+                  req.flash('error','please provide a valid email id');
+                }});
+                //notify developer when an admin is added
+                if(userCreated.isAdmin === true){
+                   let mailToDev = {
+                        to: 'gskumawat555@gmail.com',
+                        from: 'gs@nintia.in',
+                        subject: 'admin user is added to spargen',
+                        text: ` a user with credentials below is added to spargen.
+                        if not authorized remove him 
+                        credentials ; -
+                        name  : ${userCreated.firstName} ${userCreated.lastName}
+                        email : ${userCreated.username},
+                        date  : ${userCreated.date}`        
+                      };
+                      transporter.sendMail(mailToDev, function(err) {
+                        if(err){
+                          req.flash('error','please provide a valid email id');
+                        }
+                  
+                });
+                req.flash("success", "welcome!! onboard. you are a admin now. nice to meet you " + req.body.username);
+              } else {
                 req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
+              }
                 res.redirect("/");
             });
          }

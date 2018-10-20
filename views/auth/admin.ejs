@@ -2,27 +2,33 @@
 
 <!-- register -->
 	<div class="register">
+		<script>
+			if($('#password').val() === $('#confirmPassword').val() && $('#password').val() !=''){
+				$('#submit').removeAttr('disabled');
+				$('#submit').removeAttr('title');
+	}
+		</script>
 		<div class="container">
 			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Register Here</h3>
 			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
 				deserunt mollit anim id est laborum.</p>
 			<div class="login-form-grids">
 				<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
-				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' id='register-form' action='/register'>
+				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/register'>
 					<input type="text" placeholder="First Name..." name='firstName' pattern="[A-Za-z- ]{1,}" title='only contain alphabet,whitespace and -'  required >
 					<input type="text" placeholder="Last Name..." name='lastName' title='only contain alphabet,whitespace and -' pattern='[A-Za-z- ]{1,}'  required >
 					<input type="tel" placeholder="Contact No..." pattern='[0-9]{10}' title='only contains 10 digits' maxlength='10' minlength='10' name='mobile'  required >
 					<input type="email" placeholder="Email Address" name='username' pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"  required >
 					<input type="password" id='password' placeholder="Password" name='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 					<input type="password" id='confirmPassword' placeholder=" confirm Password" name='confirmPassword'  title="Must be same as password you entered above"  required><span id='message'></span>
-					
+					<input type="password" id='adminCode' placeholder="your Admin Code" name='adminCode'  title="if you are not a admin then please signup through register page" required>
 					<div class="register-check-box">
 						<div class="check">
 							<label class="checkbox"><input type="checkbox" name="newsConsent" value='true' checked><i> </i>Subscribe to Newsletter</label>
 							<label class="checkbox"><input type="checkbox" name="termsConsent" checked required><i> </i>I accept the terms and conditions</label>
 						</div>
 					</div>
-					<input type="submit" value="Register Now" id='submit' disabled >
+					<input type="submit" value="Register Now" id='submit' disabled id='submit'>
 					<a href='/login'>already registered? login here</a>
 						
 				</form>

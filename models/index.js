@@ -23,6 +23,10 @@ var userSchema = new mongoose.Schema ({
                     required: [true,'contact no. is required']
     },
     date        : {type: Date, default: Date.now},
+    isAdmin     : {
+                    type: Boolean,
+                    default : false
+    },
     resetPasswordToken : String,
     resetPasswordExpires : Date,
     newsConsent :{}

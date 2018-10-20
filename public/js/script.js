@@ -1,6 +1,24 @@
 /*  global $ */
 $(document).ready(function(){
-
+	
+	// password validate
+		$('#password, #confirmPassword').on('keyup', function () {
+			if($('#password').val() !== ''){
+				if ($('#password').val() === $('#confirmPassword').val()) {
+				    $('#message').html('Matched').css('color', 'green');
+				    $('#submit').removeAttr('disabled');
+				    $('#submit').removeAttr('title');
+				  } else{
+					$('#submit').attr('disabled', true);
+					$('#submit').attr('title', "password don't match");
+				    $('#message').html(`password don't match`).css('color', 'red');
+				  }
+			} else {
+				$('#message').html('');
+			}
+		});
+		
+		
 	/* ---- Countdown timer ---- */
 
 	$('#counter').countdown({

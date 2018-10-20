@@ -13,7 +13,8 @@ const express         = require("express"),
 // add schema models
 const User            = require("./models/index");    
 //add routes
-const indexRoutes = require("./routes/index.js");
+const indexRoutes = require("./routes/index.js"),
+      productRoutes = require("./routes/products");
 
 
 let mongodburl = process.env.DATABASEURL || "mongodb://localhost/spargen";
@@ -56,6 +57,7 @@ app.use(function(req, res, next){
 });
 
 app.use(indexRoutes);
+app.use('/products',productRoutes);
 app.get("/product/:productId/",function(req,res){
    res.render('single'); 
 });
