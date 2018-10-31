@@ -3,6 +3,17 @@ html, body{
 	background:	#fff;
 	font-family: 'Open Sans', sans-serif;
 }
+.fa {
+        float: right;
+        margin-right: 6px;
+        position: relative;
+        z-index: 2;
+        color: red;
+    
+}
+ .login-form-grids input.update-form {
+	color: #00000 !important;
+}
 p{
 	margin:0;
 }
@@ -1960,9 +1971,6 @@ label.radio {
 .add-review input[type="email"]{
 	margin-left:1em;
 }
-input:invalid {
-	outline: 2px solid red;
-}
 .add-review textarea{
 	width:100% !important;
 	min-height:150px;
@@ -2038,7 +2046,7 @@ input:invalid {
 	background:#F7F7F9;
 	margin:3em auto 0;
 }
-.login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"]{
+.login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"],.login-form-grids input[type="number"]{
 	outline: none;
     border: 1px solid #DBDBDB;
     padding: 10px 10px 10px 45px;
@@ -2046,13 +2054,13 @@ input:invalid {
     color: #999;
     display: block;
     width: 100%;
+    margin:1em 0 0;
 }
 .login-form-grids input[type="email"]{
 	background:url(../images/img-sp.png) no-repeat 5px -182px #fff;
 }
 .login-form-grids input[type="password"]{
 	background:url(../images/img-sp.png) no-repeat 5px -220px #fff;
-	margin:1em 0 0;
 }
 .forgot {
     margin: 1.5em 0 0;
@@ -2128,6 +2136,30 @@ input:invalid {
 	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
 }
 .login-form-grids input[type="text"]:nth-child(2){
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="text"]:nth-child(3){
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="text"]:nth-child(4){
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="text"]:nth-child(5){
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="text"]:nth-child(6){
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="number"]{
+	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
+	margin:1em 0;
+}
+.login-form-grids input[type="number"]:nth-child(2){
 	background:url(../images/img-sp.png) no-repeat 5px -259px #fff;
 	margin:1em 0;
 }
@@ -3815,7 +3847,7 @@ td.invert-image a img {
 	.login-form-grids {
 		margin: 1.5em auto 0;
 	}
-	.login-form-grids input[type="email"],.forgot a,.register-check-box label, .login-form-grids input[type="password"], .login-form-grids input[type="text"]{
+	.login-form-grids input[type="email"],.forgot a,.register-check-box label, .login-form-grids input[type="password"], .login-form-grids input[type="text"], .login-form-grids input[type="number"]{
 		font-size:13px;
 	}
 	.forgot {

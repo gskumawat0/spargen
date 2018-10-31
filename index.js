@@ -7,7 +7,8 @@ const express         = require("express"),
     mongoose        = require("mongoose"),
     flash           = require("connect-flash"),
     passport        = require("passport"),
-    LocalStrategy   = require('passport-local');
+    LocalStrategy   = require('passport-local'),
+    methodOverride = require("method-override");
 
     
 // add schema models
@@ -23,7 +24,8 @@ mongoose.connect(mongodburl,{ useNewUrlParser: true });
 // configure express
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));   
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride('_method'));
 app.use(flash());
 //add session
 app.use(session(
@@ -58,9 +60,6 @@ app.use(function(req, res, next){
 
 app.use(indexRoutes);
 app.use('/products',productRoutes);
-app.get("/product/:productId/",function(req,res){
-   res.render('single'); 
-});
 
 app.get("/single", function(req, res) {
     res.render("product/single");

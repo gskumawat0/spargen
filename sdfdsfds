@@ -1,0 +1,29 @@
+[33mcommit 12aa0560ca613ec0da86087c46c61321f8f8bf42[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: gouri shankar kumawat <gskumawat555@gmail.com>
+Date:   Sat Oct 20 20:08:07 2018 +0000
+
+    complete auth process
+
+[33mcommit b31b26369af3ee3ed94ed0f95a0298838f5b7dd1[m[33m ([m[1;31mheroku/master[m[33m)[m
+Author: gouri shankar kumawat <gskumawat555@gmail.com>
+Date:   Wed Oct 17 21:43:58 2018 +0000
+
+    added login and password reset
+
+[33mcommit ca4863c4a76f5e210e3c60141fd074ff90d1910a[m
+Author: gouri shankar kumawat <gskumawat555@gmail.com>
+Date:   Mon Oct 15 11:12:01 2018 +0000
+
+    add env. variable
+
+[33mcommit 914c01bacd853e9891dc7e278a26bfc7239ac33c[m
+Author: gouri shankar kumawat <gskumawat555@gmail.com>
+Date:   Mon Oct 15 10:50:56 2018 +0000
+
+    add register functonality
+
+[33mcommit 116a038b9373c387758ce952d7e33a8dc62b65d1[m
+Author: gouri shankar kumawat <gskumawat555@gmail.com>
+Date:   Tue Oct 9 10:35:01 2018 +0000
+
+    first commit
