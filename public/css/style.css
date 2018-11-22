@@ -2040,13 +2040,17 @@ label.radio {
 /*-- //Ratings --*/
 /*-- //single --*/
 /*-- login --*/
+.form-inline {
+	display: inline-block;
+	margin: 15px auto;
+}
 .login-form-grids{
 	width: 45%;
     padding: 3em;
 	background:#F7F7F9;
 	margin:3em auto 0;
 }
-.login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"],.login-form-grids input[type="number"]{
+.login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"],.login-form-grids input[type="number"], .login-form-grids input[type="file"]{
 	outline: none;
     border: 1px solid #DBDBDB;
     padding: 10px 10px 10px 45px;

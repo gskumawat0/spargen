@@ -1,21 +1,23 @@
 //add dependencies
-const express         = require("express"),
+const express       = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
     session         = require("express-session"),
-    nodemailer      = require("nodemailer"),
     mongoose        = require("mongoose"),
     flash           = require("connect-flash"),
     passport        = require("passport"),
     LocalStrategy   = require('passport-local'),
-    methodOverride = require("method-override");
+    methodOverride  = require("method-override");
+    // MongoStore      = require("connect-mongo")(session);
 
-    
+require('dotenv').config();  
 // add schema models
 const User            = require("./models/index");    
 //add routes
 const indexRoutes = require("./routes/index.js"),
-      productRoutes = require("./routes/products");
+      productRoutes = require("./routes/products"),
+      reviewRoutes  = require("./routes/reviews"),
+      userRoutes    = require("./routes/users");
 
 
 let mongodburl = process.env.DATABASEURL || "mongodb://localhost/spargen";
@@ -27,12 +29,17 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
+
+
+app.locals.moment = require('moment');
 //add session
-app.use(session(
-{
-    secret: "xcvbhgrptddxjhcyud",
+app.use(session({
+    secret: "dsyfsufwgeerwtgfjgturterterert!",
     resave: false,
     saveUninitialized: false,
+    //store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge:  30 * 24 * 60 * 60 * 1000 ,
+             expires: false} // 1 month but expires when you close the browser
 }));
 
 //authorization
@@ -60,6 +67,8 @@ app.use(function(req, res, next){
 
 app.use(indexRoutes);
 app.use('/products',productRoutes);
+app.use('/products/:productId/reviews', reviewRoutes);
+app.use('/user/:userId', userRoutes);
 
 app.get("/single", function(req, res) {
     res.render("product/single");
@@ -76,7 +85,7 @@ app.get('/checkout',function(req, res) {
 // accept all unspecified request
 app.get('*',function(req, res) {
     res.render('error');
-})
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Server Has Started!");

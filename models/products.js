@@ -20,6 +20,8 @@ var productSchema = new mongoose.Schema ({
     image   : { type: String,
                 required: true
     },
+    imageId : String,
+    updatedOn: {type:Date },
     verified : {type: String, required: true},
     pinCode  : { type : Number, required: true},
     deliveryTime : { type: Number, required: true},
@@ -42,9 +44,14 @@ var productSchema = new mongoose.Schema ({
                         ref: "User"
                     },
                     username: String,
-                    firstName: String,
-                    lastName : String,
+                    user: String,
                     mobile   : Number
-    }
+    },
+    reviews: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Review"
+      }
+   ]
 });
 module.exports = mongoose.model('Product',productSchema);

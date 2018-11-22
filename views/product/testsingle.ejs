@@ -1,5 +1,115 @@
 <% include ../partials/header %>
+<div class='container'>
+  <%- product %>
+  <div >
+     <a href="/products/<%-product._id%>/edit" class='btn btn-warning my-2 mx-2 d-block'> Update Me</a> 
+     <form class='form-inline' action="/products/<%-product._id%>?_method=DELETE" method='post'>
+       <input type=submit value='Delete Me' class='btn btn-danger'>
+  </form>
+  </div>
+  
+  
+      <!--COMMENT SECTION START-->
+    <div class="well">
+      <!--Setting up the add new review button that is used for collapsing-->
+      <div class="text-right">
+        <a class="btn btn-success pull-right" role="button" data-toggle="collapse" href="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new Review</a>
+      </div>
 
- <%- product %>
+      <!--Comment section title-->
+      <h4><strong>Reviews <span class="glyphicon glyphicon glyphicon-comment" aria-hidden="true"></span></strong></h4>
 
+      <!--Collapse Add a review form START-->
+      <div class="collapse" id="collapseReview">
+        <div class="well" style="border-left: 5px solid #00C851;">
+            <% if(!currentUser) { %>
+          <!--If the user is not logged in, direct him to the login page-->
+          <h5>You need to login before you can review. <a href="/login">Click here</a> to go to the login page.</h5>
+            <% } %>
+            <% if(currentUser) { %>
+          <!--If the user is logged in, show the new review form-->
+          <h4>Write your review <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span></h4>
+          <form id="add-review-form" action="/products/<%= product._id %>/reviews" method="POST">
+            <div class="form-group">
+              <input class="form-control" type="text" disabled value="<%= currentUser.user %>">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="review[text]" placeholder="Write your review..." form="add-review-form" rows="5" cols="70"></textarea>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-success btn-sm">Review <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+            </div>
+          </form>
+            <% } %>
+        </div>
+      </div>
+      <!--Collapse Add a Review form END-->
+
+      <hr>
+
+      <!--Check if there are comments, if there are none say no comments.-->
+        <% if (product.reviews.length === 0) { %>
+      <em style="color: grey;">No review yet.</em>
+        <% } %>
+
+      <!--Display comments by looping through them-->
+        <% product.reviews.forEach(function(review) { %>
+      <div class="row">
+        <div class="col-md-12">
+          <strong>
+              <% if (currentUser && currentUser._id.equals(review.createdBy.id)) { %>
+            <!--If the current user owns the review, change the color of the user icon-->
+            <span style="color: orange;" class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <% } else { %>
+            <!--Else just display it black-->
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <% } %>
+            <!--Print out the author username-->
+              <%= review.createdBy.user %>
+          </strong>
+          <!--Show when the review was made-->
+          <span class="pull-right"><%= moment(review.createdAt).fromNow() %></span>
+          <!--Printing the review-->
+          <p><%= review.text %></p>
+          <!--If the visitor is logged in and the owner of the review, show the edit and delete buttons-->
+            <% if (currentUser && currentUser._id.equals(review.createdBy.id) ||currentUser.isAdmin) { %>
+          <!--Edit button used for collapsing the edit review form-->
+          <a class="btn btn-xs btn-warning" role="button" data-toggle="collapse" href="#collapseEdit<%= review._id %>" aria-expanded="false" aria-controls="collapse<%= review._id %>">
+            Edit</a>
+          <!--Delete review button-->
+          <form id="delete-form" action="/products/<%= product._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn btn-xs btn-danger">Delete</button>
+          </form>
+          <!--Edit review form-->
+          <div class="collapse" id="collapseEdit<%= review._id %>">
+            <div class="well" style="border-left: 5px solid #ffbb33; margin-top: 15px;">
+              <h4>Edit your review <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></h4>
+              <form id="edit-review-form" action="/products/<%= product._id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                  <input class="form-control" type="text" disabled value="<%= currentUser.user %>">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="review[text]" placeholder="Your review ..." form="edit-review-form" rows="5" cols="70"><%= review.text %></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-warning btn-sm">Edit review <span class="glyphicon glyphicon-comment" aria-hidden="true"></span></button>
+                </div>
+              </form>
+            </div>
+          </div>
+            <% } %>
+          <hr>
+        </div>
+      </div>
+        <% }) %>
+    </div>
+    <!--COMMENT SECTION END-->
+
+  </div>
+</div>
+</div>
+</div>
+ 
+   
 <% include ../partials/footer %>

@@ -4,7 +4,8 @@ const express = require("express"),
     async     = require("async"),
     nodemailer= require("nodemailer"), 
     passport  = require("passport");
-
+    
+    
 //require model
 const User = require("../models/index.js");
 
@@ -32,7 +33,7 @@ router.post('/register',function(req,res){
         newsConsent = req.body.newsConsent;
     
     let userInfo = new  User({firstName: firstName, lastName: lastName, mobile: mobile, username:username, newsConsent: newsConsent });
-      if(req.body.adminCode ==='secret123'){
+      if(req.body.adminCode === process.env.ADMIN_CODE && req.body.adminCode !== ''){
         userInfo.isAdmin = true;
       }
     //register and create user
@@ -55,7 +56,7 @@ router.post('/register',function(req,res){
                         auth:
                         {
                             user: 'gs@nintia.in', // generated ethereal user
-                            pass: 'gsK@w3b95' // generated ethereal password
+                            pass: process.env.MY_EMAIL_PASS // generated ethereal password
                         }
                     });
               var mailOptions = {
@@ -111,7 +112,7 @@ router.post('/login',
         successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: 'Invalid username or password.',
-        successFlash: 'Welcome!'
+        successFlash: 'Welcome back!'
     })
 );
 
@@ -162,7 +163,7 @@ router.post('/forgot', function(req, res, next) {
             auth:
             {
                 user: 'gs@nintia.in', // sender account
-                pass: 'gsK@w3b95' //  account key
+                pass: process.env.MY_EMAIL_PASS //  account key
             }
         });
       var mailOptions = {
@@ -247,8 +248,8 @@ router.post('/reset/:token', function(req, res) {
                 secure: true, // true for 465, false for other ports
                 auth:
                 {
-                    user: 'gs@nintia.in', // generated ethereal user
-                    pass: 'gsK@w3b95' // generated ethereal password
+                    user: 'gs@nintia.in',
+                    pass: process.env.MY_EMAIL_PASS 
                 }
             });
       var mailOptions = {

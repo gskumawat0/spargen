@@ -8,7 +8,7 @@
 				deserunt mollit anim id est laborum.</p>
 			<div class="login-form-grids">
 				<h5 class="animated wow slideInUp" data-wow-delay=".5s">Product information</h5>
-				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/products/'>
+				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/products/' enctype="multipart/form-data">
 					<input type="text" placeholder="Category..." name='product[category]' title='only contain alphabet,whitespace and -'  required >
 					<input type="text" placeholder="Company.." name='product[company]' title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 					<input type="text" placeholder="Model..."  title='only contain alphabet,whitespace and -' name='product[model]'  required >
@@ -21,7 +21,7 @@
 					<input type="number" placeholder="pin code" name='product[pinCode]'  required >
 					<input type="number" placeholder="delivery time in days" name='product[deliveryTime]'  required >
 					<input type="text" placeholder="seller Name..." name='product[sellerName]' title='only contain alphabet,whitespace and -'  required >
-					<input type='text'  placeholder='image url' name='product[image]' required>
+					<input type='file' name='product[image]' id='image' accept='image/*'>
 					<input type="submit" value="Add a Product" id='submit' >
 				</form>
 			</div>
