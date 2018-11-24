@@ -48,6 +48,10 @@ router.post('/register',function(req,res){
          {
             passport.authenticate("local")(req, res, function()
             {
+              if (req.session.oldUrl) {
+                var urltoForward = req.session.oldUrl;
+                req.session.urltoForward = null;
+              }  
                let transporter = nodemailer.createTransport(
                     {
                         host: 'smtp.stackmail.com',
@@ -95,7 +99,7 @@ router.post('/register',function(req,res){
               } else {
                 req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
               }
-                res.redirect("/");
+              res.redirect(urltoForward);
             });
          }
      });
@@ -107,14 +111,20 @@ router.get('/login',function(req, res) {
 });
 
 router.post('/login',
-    passport.authenticate('local',
+  passport.authenticate('local',
     {
-        successRedirect: '/',
         failureRedirect: '/login',
-        failureFlash: 'Invalid username or password.',
-        successFlash: 'Welcome back!'
-    })
-);
+        failureFlash: 'Invalid username or password.'
+    }), function (req, res, next) {
+          if (req.session.oldUrl) {
+              var urltoForward = req.session.oldUrl;
+              req.session.urltoForward = null;
+              res.redirect(urltoForward);
+          } else {
+            req.flash('success','Nice to see you back'); 
+            res.redirect('/products');
+          }
+});
 
 router.get('/logout',function(req, res) {
     req.logout();

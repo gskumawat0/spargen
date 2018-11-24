@@ -7,6 +7,7 @@ module.exports = {
         if(req.isAuthenticated()){
             return next();
         }
+        req.session.urltoForward = req.url;
         req.flash("error", "You must be signed in to do that!");
         res.redirect("/login");
     },

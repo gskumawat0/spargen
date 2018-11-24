@@ -7,8 +7,8 @@ const express       = require("express"),
     flash           = require("connect-flash"),
     passport        = require("passport"),
     LocalStrategy   = require('passport-local'),
-    methodOverride  = require("method-override");
-    // MongoStore      = require("connect-mongo")(session);
+    methodOverride  = require("method-override"),
+    MongoStore      = require("connect-mongo")(session);
 
 require('dotenv').config();  
 // add schema models
@@ -17,7 +17,8 @@ const User            = require("./models/index");
 const indexRoutes = require("./routes/index.js"),
       productRoutes = require("./routes/products"),
       reviewRoutes  = require("./routes/reviews"),
-      userRoutes    = require("./routes/users");
+      userRoutes    = require("./routes/users"),
+      cartRoutes    = require("./routes/cart");
 
 
 let mongodburl = process.env.DATABASEURL || "mongodb://localhost/spargen";
@@ -30,15 +31,14 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
 
-
 app.locals.moment = require('moment');
 //add session
 app.use(session({
-    secret: "dsyfsufwgeerwtgfjgturterterert!",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    //store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge:  30 * 24 * 60 * 60 * 1000 ,
+    store: new MongoStore({mongooseConnection : mongoose.connection }),
+    cookie: { maxAge:  2 * 60 * 1000 ,
              expires: false} // 1 month but expires when you close the browser
 }));
 
@@ -60,6 +60,7 @@ passport.deserializeUser(function(id, done)
 
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
+   res.locals.session = req.session;
    res.locals.error = req.flash("error");
    res.locals.success = req.flash("success");
    next();
@@ -69,6 +70,7 @@ app.use(indexRoutes);
 app.use('/products',productRoutes);
 app.use('/products/:productId/reviews', reviewRoutes);
 app.use('/user/:userId', userRoutes);
+app.use('/cart', cartRoutes);
 
 app.get("/single", function(req, res) {
     res.render("product/single");
@@ -78,9 +80,6 @@ app.get('/contact',function(req, res) {
     res.render('contact/mail');
 });
 
-app.get('/checkout',function(req, res) {
-    res.render('cart/checkout');
-});
 
 // accept all unspecified request
 app.get('*',function(req, res) {
