@@ -1,40 +1,50 @@
 module.exports = function Cart(oldCart) {
-    this.items = oldCart.items || {};
+    this.products = oldCart.products || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
-    
-    this.add = function(item, id) {
-        var storedItem = this.items[id];
-        if (!storedItem) {
-            storedItem = this.items[id] = {item: item, qty: 0, price: 0};
+    console.log(this);
+    this.add = function(product, id) {
+        var storedProduct = this.products[id];
+        if (!storedProduct) {
+            storedProduct = this.products[id] = {
+                product : {
+                    sellerName: product.sellerName,
+                    image: product.image,
+                    discounted_price: product.discounted_price,
+                    printed_price : product.printed_price,
+                    name : product.name
+                }, 
+                qty: 0, price: 0
+            };
         }
-        storedItem.qty++;
-        storedItem.price = storedItem.item.discounted_price * storedItem.qty;
+        console.log(this.products[id]);
+        storedProduct.qty++;
+        storedProduct.price = storedProduct.product.discounted_price * storedProduct.qty;
         this.totalQty++;
-        this.totalPrice += storedItem.item.discounted_price;
+        this.totalPrice += storedProduct.product.discounted_price;
     };
 
     this.reduceByOne = function(id) {
-        this.items[id].qty--;
-        this.items[id].price -= this.items[id].item.discounted_price;
+        this.products[id].qty--;
+        this.products[id].price -= this.products[id].product.discounted_price;
         this.totalQty--;
-        this.totalPrice -= this.items[id].item.discounted_price;
+        this.totalPrice -= this.products[id].product.discounted_price;
 
-        if (this.items[id].qty <= 0) {
-            delete this.items[id];
+        if (this.products[id].qty <= 0) {
+            delete this.products[id];
         }
     };
 
-    this.removeItem = function(id) {
-        this.totalQty -= this.items[id].qty;
-        this.totalPrice -= this.items[id].price;
-        delete this.items[id];
+    this.removeProduct = function(id) {
+        this.totalQty -= this.products[id].qty;
+        this.totalPrice -= this.products[id].price;
+        delete this.products[id];
     };
     
     this.generateArray = function() {
         var arr = [];
-        for (var id in this.items) {
-            arr.push(this.items[id]);
+        for (var id in this.products) {
+            arr.push(this.products[id]);
         }
         return arr;
     };

@@ -99,7 +99,7 @@ router.post('/register',function(req,res){
               } else {
                 req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
               }
-              res.redirect(urltoForward);
+              res.redirect(urltoForward || '/products');
             });
          }
      });

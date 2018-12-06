@@ -10,6 +10,15 @@
 	</div>
 <!-- //breadcrumbs -->
 <!-- single -->
+	<div class='container'>
+	  <%- product %>
+	  <div >
+	     <a href="/products/<%-product._id%>/edit" class='btn btn-warning my-2 mx-2 d-block'> Update Me</a> 
+	     <form class='form-inline' action="/products/<%-product._id%>?_method=DELETE" method='post'>
+	       <input type=submit value='Delete Me' class='btn btn-danger'>
+	  </form>
+    </div>
+
 	<div class="single">
 		<div class="container">
 			<div class="col-md-4 products-left">

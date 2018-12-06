@@ -21,7 +21,7 @@ const indexRoutes = require("./routes/index.js"),
       cartRoutes    = require("./routes/cart");
 
 
-let mongodburl = process.env.DATABASEURL || "mongodb://localhost/spargen";
+let mongodburl = process.env.DATABASEURL;
 
 mongoose.connect(mongodburl,{ useNewUrlParser: true });
 // configure express
@@ -35,11 +35,13 @@ app.locals.moment = require('moment');
 //add session
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     store: new MongoStore({mongooseConnection : mongoose.connection }),
-    cookie: { maxAge:  2 * 60 * 1000 ,
-             expires: false} // 1 month but expires when you close the browser
+    cookie: { maxAge:   6 * 30 * 24 * 60 * 60 * 1000 ,
+            //   secure : true,
+              expires: false
+             } // 1 month but expires when you close the browser
 }));
 
 //authorization

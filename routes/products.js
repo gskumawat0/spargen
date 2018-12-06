@@ -216,7 +216,7 @@ router.delete('/:productId', middleware.checkUserProduct, function(req,res){
             return res.redirect('back'); 
         }
     });
-    req.flash('success', 'product deleted successfully');
+    req.flash('success', `product deleted successfully. add new product <a href='/products/addproducts'>here</a>`);
     res.redirect('/products');
 });
 

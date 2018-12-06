@@ -25,7 +25,7 @@ router.get('/checkout', middleware.isLoggedIn, function(req, res, next) {
     res.render('cart/checkout', {total: cart.totalPrice});
 });
     
-router.get('/:productId', function(req, res) {
+router.get('/:productId',middleware.isLoggedIn, function(req, res) {
     let cart = new Cart(req.session.cart ? req.session.cart : {});
     
     Product.findById(req.params.productId,function(err,foundProduct){
@@ -45,6 +45,7 @@ router.get('/:productId', function(req, res) {
         }
     });
 });
+
 router.get('/reduce/:productId', function(req, res, next) {
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     cart.reduceByOne(req.params.productId);
@@ -55,7 +56,7 @@ router.get('/reduce/:productId', function(req, res, next) {
 router.get('/remove/:productId', function(req, res, next) {
     var cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    cart.removeItem(req.params.productId);
+    cart.removeProduct(req.params.productId);
     req.session.cart = cart;
     res.redirect('/cart');
 });

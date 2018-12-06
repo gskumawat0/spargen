@@ -16,7 +16,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
                 return res.redirect('back');
 
         } else {
-             res.render("reviews/new", {product: foundProduct});
+             res.render("reviews/newReview", {product: foundProduct});
         }
     });
 });
@@ -53,7 +53,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 });
 
 router.get("/:reviewId/edit", middleware.isLoggedIn, middleware.checkUserReview, function(req, res){
-  res.render("reviews/edit", {product_id: req.params.productId, review: req.review});
+  res.render("reviews/editReview", {product_id: req.params.productId, review: req.review});
 });
 
 router.put("/:reviewId", middleware.isAdmin, function(req, res){
