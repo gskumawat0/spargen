@@ -22,13 +22,13 @@ var productSchema = new mongoose.Schema ({
     },
     imageId : String,
     updatedOn: {type:Date },
-    verified : {type: String, required: true},
+    // verified : {type: String, required: true},
     pinCode  : { type : Number, required: true},
-    deliveryTime : { type: Number, required: true},
-    quantity     : {
-                    type: Number,
-                    required: [true,'contact no. is required']
-    },
+    // deliveryTime : { type: Number, required: true},
+    // quantity     : {
+    //                 type: Number,
+    //                 required: [true,'contact no. is required']
+    // },
     printed_price : {
                     type: Number,
                     required: [true,'Max. Retail Price is required']
@@ -36,8 +36,9 @@ var productSchema = new mongoose.Schema ({
     discounted_price : {
                     type: Number,
     },
+    isFeatured : {type: Boolean, default: true},
     sellerName : { type: String, required: true},
-    date        : {type: Date, default: Date.now},
+    addedOn        : {type: Date, default: Date.now},
     uploadedBy:  {
                     id: {
                         type: mongoose.Schema.Types.ObjectId,

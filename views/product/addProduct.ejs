@@ -1,34 +1,45 @@
 <% include ../partials/header %>
-
+<!-- breadcrumbs start -->
+<div class="breadcrumb">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="active">Products</li>
+			<li class="active">add</li></li>
+		</ol>
+	</div>
+</div>
+<!-- breadcrumbs ends-->
 <!-- register -->
-	<div class="register">
-		<div class="container">
-			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Add a Product</h3>
-			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
-				deserunt mollit anim id est laborum.</p>
-			<div class="login-form-grids">
-				<h5 class="animated wow slideInUp" data-wow-delay=".5s">Product information</h5>
-				<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/products/' enctype="multipart/form-data">
-					<input type="text" placeholder="Category..." name='product[category]' title='only contain alphabet,whitespace and -'  required >
-					<input type="text" placeholder="Company.." name='product[company]' title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-					<input type="text" placeholder="Model..."  title='only contain alphabet,whitespace and -' name='product[model]'  required >
-					<input type="text" placeholder="Name of Product..." name='product[name]'  required >
-					<input type="number" placeholder='Max Retail Price of Product...' name='product[printed_price]'  required >
-					<input type="number" placeholder="Discounted price of Product..." name='product[discounted_price]'  required >
-					<input type="text" placeholder="Description of Product..." name='product[description]'  required >
-					<input type="text" placeholder="Company Verified Product [Y or N]..." name='product[verified]'  required >
-					<input type="number" placeholder="quantity" name='product[quantity]'  required >
-					<input type="number" placeholder="pin code" name='product[pinCode]'  required >
-					<input type="number" placeholder="delivery time in days" name='product[deliveryTime]'  required >
-					<input type="text" placeholder="seller Name..." name='product[sellerName]' title='only contain alphabet,whitespace and -'  required >
-					<input type='file' name='product[image]' id='image' accept='image/*'>
-					<input type="submit" value="Add a Product" id='submit' >
-				</form>
-			</div>
-			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-				<a href="/">Home</a>
-			</div>
+<div class="register">
+	<div class="container">
+		<h3 class="animated wow zoomIn" data-wow-delay=".5s">Add a Product</h3>
+		<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<div class="login-form-grids">
+			<h5 class="animated wow slideInUp" data-wow-delay=".5s">Product information</h5>
+			<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/products/' enctype="multipart/form-data">
+				<input type="text" placeholder="Category of product..." name='product[category]' title='only contain alphabet,whitespace and -'  required >
+				<input type="text" placeholder="Company of product.." name='product[company]' title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+				<input type="text" placeholder="Model..."  title='only contain alphabet,whitespace and -' name='product[model]'  required >
+				<input type="text" placeholder="Name of Product..." name='product[name]'  required >
+				<input type="number" placeholder='Max Retail Price of Product...' name='product[printed_price]'  required >
+				<input type="number" placeholder="Discounted price of Product..." name='product[discounted_price]'  required >
+				<!--<input type="text" placeholder="Company Verified Product [Y or N]..." name='product[verified]'  required >-->
+				<!--<input type="number" placeholder="quantity" name='product[quantity]'  required >-->
+				<input type="number" placeholder="pin code of seller" name='product[pinCode]'  required >
+				<!--<input type="number" placeholder="delivery time in days" name='product[deliveryTime]'  required >-->
+				<input type="text" placeholder="seller Name..." name='product[sellerName]' title='only contain alphabet,whitespace and -'  required >
+				<input type='file' name='product[image]' id='image' accept='image/*'>
+				<!--<input type="text" placeholder="Description of Product..." name='product[description]'  required >-->
+				<textarea name="product[description]" placeholder='Description of product'id='textarea' cols="30" rows="10"></textarea>	
+				<!--<script> CKEDITOR.replace( 'textarea' ); </script>-->
+				<input type="submit" value="Add a Product" id='submit' >
+			</form>
+		</div>
+		<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
+			<a href="/">Home</a>
 		</div>
 	</div>
-<!-- //register -->
+</div>
+<!-- register -->
 <% include ../partials/footer %>

@@ -12,6 +12,6 @@ var reviewSchema = mongoose.Schema({
                 user: String,
                 mobile   : Number
             }
-});
+        });
 
 module.exports = mongoose.model("Review", reviewSchema);

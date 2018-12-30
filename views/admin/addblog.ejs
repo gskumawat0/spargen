@@ -1,0 +1,76 @@
+<% include ../partials/header %>
+<div class='container'>
+	<div id="page-wrapper">
+			<div class="graphs">
+				<h1 class="blank1">Add New Blog</h1>
+					<div class="tab-content">
+						<!--<?= $this->Form->create(null,['class'=>'form-horizontal', 'type' => 'file']); ?>-->
+						<form method='post' action='/blogs' id="horizontal-form">
+							<div class="tab-pane active" >
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-12 col-md-4 control-label">Blog Tag</label>
+									<div class="col-md-8 col-sm-12">
+										<!--<?= $this->Form->control('blog_tag', ['class' => 'form-control1', 'type' => 'text', 'label' => false, 'required']) ?>-->
+										<!--<label for="btags">Tags : </label>-->
+										<input type="text"  id='btags' class='form-control' name='blog[tags]' required>	
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class='col-md-4 col-sm-12' control-label">Title</label>
+									<div class="col-md-8 col-sm-12">
+										<!--<?= $this->Form->control('title', ['class' => 'form-control1', 'type' => 'text', 'label' => false, 'required']) ?>-->
+										<!--<label for="btitle">Title : </label>-->
+										<input  id='btitle' class='form-control' type="text" name="blog[title]"/>
+									</div>
+								</div>
+								<!--<div class="form-group">-->
+								<!--	<label for="focusedinput" class='col-md-4 col-sm-12' control-label">Tags</label>-->
+								<!--	<div class="col-md-8 col-sm-12">-->
+								<!--		<?= $this->Form->control('tags', ['type' => 'textarea', 'rows' => '5', 'cols' => '80', 'label' => false, 'required']) ?>-->
+								<!--	</div>-->
+								<!--</div>-->
+								<div class="form-group">
+											<label for="focusedinput" class='col-md-4 col-sm-12' control-label">Description</label>
+											<!--<?php -->
+											<!--	echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));-->
+											<!--	echo $this->Html->script('ckfinder/ckfinder.js', array('inline' => false));-->
+											<!--?>-->
+											<div class="col-md-8 col-sm-12">
+												<!--<?php echo $this->Form->control('description', ['type' => 'textarea', 'id' => 'description', 'rows' => '10', 'cols' => '80', 'placeholder' => 'Write Something....', 'label' => false]) ?>-->
+												<textarea name="blog[description]" class='form-control'rows='10' cols='80'></textarea>
+											<!--	// <script type="text/javascript"> -->
+											<!--	// 	CKEDITOR.replace('description',-->
+											<!--	// 	{-->
+											<!--	// 	filebrowserBrowseUrl : 'http://getsearchresult.com/js/ckfinder/ckfinder.html',-->
+											<!--	// 	filebrowserImageBrowseUrl : 'http://getsearchresult.com/js/ckfinder/ckfinder.html?type=Images',-->
+											<!--	// 	filebrowserFlashBrowseUrl : 'http://getsearchresult.com/js/ckfinder/ckfinder.html?type=Flash',-->
+											<!--	// 	filebrowserUploadUrl : 'http://getsearchresult.com/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',-->
+											<!--	// 	filebrowserImageUploadUrl : 'http://getsearchresult.com/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',-->
+											<!--	// 	filebrowserFlashUploadUrl : 'http://getsearchresult.com/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'-->
+											<!--	// 	});-->
+											<!--	// </script> -->
+											</div>
+										</div>				
+								<div class="form-group">
+									<label for="focusedinput" class='col-md-4 col-sm-12' control-label">Image</label>
+									<div class="col-md-8 col-sm-12">
+										<!--<?= $this->Form->control('photo', ['class' => 'form-control1', 'id' => 'image', 'type' => 'file', 'label' => false, 'required']) ?>-->
+										<input type="file" class='form-control' name="blog[image]"/>
+									</div>
+								</div>
+								<div class="form-group">
+											<label for="focusedinput" class='col-md-4 col-sm-12' control-label"></label>
+											<div class="col-md-8 col-sm-12">
+												<!--<?= $this->Form->submit('Submit', ['type'=>'submit','class' => 'btn-success btn']) ?>-->
+												<input type="submit" class='form-control btn btn-warning' value='Submit'/>
+											</div>
+										</div>
+							</div>
+							<!--<?= $this->Form->end() ?>-->
+						</form>
+					</div>
+				
+			</div>
+	</div>
+</div>	
+<% include ../partials/footer %>

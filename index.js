@@ -18,7 +18,8 @@ const indexRoutes = require("./routes/index.js"),
       productRoutes = require("./routes/products"),
       reviewRoutes  = require("./routes/reviews"),
       userRoutes    = require("./routes/users"),
-      cartRoutes    = require("./routes/cart");
+      cartRoutes    = require("./routes/cart"),
+      adminRoutes   = require("./routes/admin");
 
 
 let mongodburl = process.env.DATABASEURL;
@@ -73,15 +74,25 @@ app.use('/products',productRoutes);
 app.use('/products/:productId/reviews', reviewRoutes);
 app.use('/user/:userId', userRoutes);
 app.use('/cart', cartRoutes);
+app.use('/admin', adminRoutes);
 
 app.get("/single", function(req, res) {
+    res.render("product/single");
+});
+app.get('/blogs',function(req, res) {
     res.render("product/single");
 });
 
 app.get('/contact',function(req, res) {
     res.render('contact/mail');
 });
+app.get('/about',function(req, res) {
+    res.render('about/about');
+});
 
+app.get('/test', function(req, res, next) {
+    res.render('admin/add');
+})
 
 // accept all unspecified request
 app.get('*',function(req, res) {
