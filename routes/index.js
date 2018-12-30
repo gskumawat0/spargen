@@ -7,11 +7,26 @@ const express = require("express"),
     
     
 //require model
-const User = require("../models/index.js");
+const User = require("../models/index");
+const Product = require("../models/products");
+const Blog = require("../models/blogs");
 
 //index route
-router.get('/',function (req,res) {
-    res.render("index");
+router.get('/', async function (req,res,next) {
+    try {
+        let products = await Product.find({}).
+                              where('isFeatured').equals(true).
+                              sort('-addedOn').
+                              limit(4).exec();
+        // // let categories = Category.find({}).sort('-date');  
+        // let blogs  = Blog.find({}).where("isFeatured").equals('true').sort('-publishedOn').limit(4);  
+        res.render('index', {products: products });
+    }
+    catch(err){
+        req.flash('error', err.message);
+        res.render('index');
+    }
+    
 });
 
 //register routes
@@ -25,14 +40,12 @@ router.get('/sgadmin',function(req, res) {
 
 router.post('/register',function(req,res){
     //fetch user info
-    let firstName=req.body.firstName,
-        lastName = req.body.lastName,
-        mobile= req.body.mobile,
-        username = req.body.username,
-        password = req.body.password,
-        newsConsent = req.body.newsConsent;
-    
-    let userInfo = new  User({firstName: firstName, lastName: lastName, mobile: mobile, username:username, newsConsent: newsConsent });
+    let {firstName}=req.body,
+        {lastName} = req.body,
+        {mobile} = req.body,
+        {username} = req.body,
+        {password} = req.body;
+    let userInfo = new  User({firstName: firstName, lastName: lastName, mobile: mobile, username:username});
       if(req.body.adminCode === process.env.ADMIN_CODE && req.body.adminCode !== ''){
         userInfo.isAdmin = true;
       }
@@ -91,7 +104,7 @@ router.post('/register',function(req,res){
                       };
                       transporter.sendMail(mailToDev, function(err) {
                         if(err){
-                          req.flash('error','please provide a valid email id');
+                          // req.flash('error','please provide a valid email id');
                         }
                   
                 });

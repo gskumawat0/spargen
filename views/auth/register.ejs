@@ -1,5 +1,14 @@
 <% include ../partials/header %>
-
+<!-- breadcrumbs start -->
+<div class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="active">Register</li>
+		</ol>
+	</div>
+</div>
+<!-- breadcrumbs ends-->
 <!-- register -->
 	<div class="register">
 		<div class="container">
@@ -18,17 +27,15 @@
 					
 					<div class="register-check-box">
 						<div class="check">
-							<label class="checkbox"><input type="checkbox" name="newsConsent" value='true' checked><i> </i>Subscribe to Newsletter</label>
 							<label class="checkbox"><input type="checkbox" name="termsConsent" checked required><i> </i>I accept the terms and conditions</label>
 						</div>
 					</div>
 					<input type="submit" value="Register Now" id='submit' disabled >
-					<a href='/login'>already registered? login here</a>
-						
+					<a href='/login'>Already registered? Login here</a>
 				</form>
 			</div>
 			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-				<a href="/">Home</a>
+				<a href="/">Go to Home</a>
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,55 @@
+<div id="page-wrapper">
+<div class="graphs">
+	<h3 class="blank1">View Blog</h3>
+	<div class="bs-example4" data-example-id="simple-responsive-table">
+	
+	<div class="table-responsive">
+	  
+	  <table class="table">
+			<tr>
+				<th>Image</th>
+				<td>
+				<?php
+						echo $this->Html->image('upload/blogs/'.$blog['image'], ['height' => '220PX', 'width' => '340px'])."<br /><br />";
+				?>
+				</td>
+			</tr>
+			<tr>
+				<th>ID</th>
+				<td><?php echo $blog['id'] ?></td>
+			</tr>
+			<tr>
+				<th>Blog Tag</th>
+				<td><?php echo $blog['blog_tag'] ?></td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td><?php echo $blog['title'] ?></td>
+			</tr>
+			<tr>
+				<th>Tags</th>
+				<td><?php echo $blog['tags'] ?></td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td><?php echo $blog['description'] ?></td>
+			</tr>
+			
+			<tr>
+				<th><center>
+					<?= $this->Html->link(__('Back'), $this->request->referer()) ?>
+				</center></th>
+			</tr>
+	  </table>
+	</div><!-- /.table-responsive -->
+</div>	
+</div>
+</div>
+<script>
+// Can also be used with $(document).ready()
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    animation: "slide"
+  });
+});
+</script>

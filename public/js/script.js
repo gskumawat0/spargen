@@ -1,6 +1,7 @@
 /*  global $ */
 $(document).ready(function(){
-	
+	//breadcrumb devider
+	// $breadcrumb-divider: quote(">");
 	// password validate
 		$('#password, #confirmPassword').on('keyup', function () {
 			if($('#password').val() !== ''){

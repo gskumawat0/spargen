@@ -148,7 +148,7 @@ router.get("/:productId", function(req, res){
         }
         else {
             //render show template with that campground
-            res.render("product/testsingle", {product: foundProduct});
+            res.render("product/single", {product: foundProduct});
         }
     });
 });
@@ -174,19 +174,19 @@ router.put('/:productId',middleware.checkUserProduct,upload.single('product[imag
                 }     
                 else{
                     if(req.file){
-                        try {
-                            await cloudinary.uploader.destroy(foundProduct.imageId); 
-                            let result = await cloudinary.uploader.upload(req.file.path);
-                            req.body.product.imageId = result.public_id;
-                            req.body.product.image   = result.secure_url;
-                            req.body.product.updatedOn = foundProduct.updatedOn + " , " + Date(Date.now).toString();
+                            try {
+                                await cloudinary.uploader.destroy(foundProduct.imageId); 
+                                let result = await cloudinary.uploader.upload(req.file.path);
+                                req.body.product.imageId = result.public_id;
+                                req.body.product.image   = result.secure_url;
+                            }
+                            catch(err){
+                                req.flash('error',err.message);
+                                return res.redirect('back');
+                            }
                         }
-                        catch(err){
-                            req.flash('error',err.message);
-                            return res.redirect('back');
-                        }
-                        }
-                Product.findOneAndUpdate(foundProduct._id, { $set: req.body.product}, function(err, updatedProduct){
+                    req.body.product.updatedOn = Date.now();
+                    Product.findOneAndUpdate({_id: foundProduct._id}, { $set: req.body.product}, function(err, updatedProduct){
                    if(err){
                         req.flash("error", err.message);
                         return res.redirect('back');
@@ -200,25 +200,20 @@ router.put('/:productId',middleware.checkUserProduct,upload.single('product[imag
     });
 });
 
-router.delete('/:productId', middleware.checkUserProduct, function(req,res){
-    Product.findById(req.params.productId, async function(err,productToDelete){
+router.delete('/:productId', middleware.checkUserProduct, async function(req,res){
         try{
+             let productToDelete = await Product.findOne({_id : req.params.productId});
+             console.log(productToDelete);
             await cloudinary.uploader.destroy(productToDelete.imageId);
-            Product.findByIdAndDelete(productToDelete._id,function(err){
-                if(err){
-                    req.flash('error',err.message);
-                    return res.redirect('back');
-                }
-            });
-        }
+            Product.findByIdAndDelete(productToDelete._id);
+            req.flash('success', `product deleted successfully. add new product <a href='/products/addproducts'>here</a>`);
+            res.redirect('/products');    
+        }    
         catch(err){
             req.flash("error", err.message);
             return res.redirect('back'); 
         }
     });
-    req.flash('success', `product deleted successfully. add new product <a href='/products/addproducts'>here</a>`);
-    res.redirect('/products');
-});
 
 //regex validate
 function escapeRegex(text){

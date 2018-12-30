@@ -1,7 +1,6 @@
-var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
-
-var userSchema = new mongoose.Schema ({
+let mongoose = require("mongoose");
+let passportLocalMongoose = require("passport-local-mongoose");
+let userSchema = new mongoose.Schema ({
     firstName   : {type: String,
                     match: /[A-Za-z- ]{1,}/,
                     required: [true,'firstName is required'],
@@ -22,14 +21,20 @@ var userSchema = new mongoose.Schema ({
                     type: Number,
                     required: [true,'contact no. is required']
     },
-    date        : {type: Date, default: Date.now},
+    registeredOn  : {type: Date, default: Date.now},
     isAdmin     : {
                     type: Boolean,
                     default : false
     },
+    cart        : {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cart"
+        }
+    },
     resetPasswordToken : String,
     resetPasswordExpires : Date,
-    newsConsent :{}
+    // newsConsent :{}
 
 });
 userSchema.plugin(passportLocalMongoose);

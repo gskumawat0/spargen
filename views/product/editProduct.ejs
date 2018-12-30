@@ -1,5 +1,16 @@
 <% include ../partials/header %>
-
+<!-- breadcrumbs start -->
+<div class="breadcrumbs">
+	<div class="container">
+		<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+			<li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+			<li class="active">Products</li>
+			<li class="active"><%= product.name %></li>
+			<li class="active">edit</li></li>
+		</ol>
+	</div>
+</div>
+<!-- breadcrumbs ends-->
 <!-- register -->
 	<div class="register">
 		<div class="container">
@@ -16,10 +27,10 @@
 					<input type="number" placeholder='Max Retail Price of Product...' name='product[printed_price]' value="<%- product.printed_price%>" class='update'  required >
 					<input type="number" placeholder="Discounted price of Product..." name='product[discounted_price]' value="<%- product.discounted_price%>" class='update'  required >
 					<input type="text" placeholder="Description of Product..." name='product[description]' value="<%- product.description%>" class='update'  required >
-					<input type="text" placeholder="Company Verified Product[Y or N]..." name='product[verified]' value="<%- product.verified%>" class='update'  required >
-					<input type="number" placeholder="quantity" name='product[quantity]' value="<%- product.quantity%>" class='update' required >
+					<!--<input type="text" placeholder="Company Verified Product[Y or N]..." name='product[verified]' value="<%- product.verified%>" class='update'  required >-->
+					<!--<input type="number" placeholder="quantity" name='product[quantity]' value="<%- product.quantity%>" class='update' required >-->
 					<input type="number" placeholder="pin code" name='product[pinCode]'  value="<%- product.pinCode%>" class='update' required >
-					<input type="number" placeholder="delivery time in days" name='product[deliveryTime]' value="<%- product.deliveryTime%>" class='update'  required >
+					<!--<input type="number" placeholder="delivery time in days" name='product[deliveryTime]' value="<%- product.deliveryTime%>" class='update'  required >-->
 					<input type="text" placeholder="seller Name..." name='product[sellerName]' title='only contain alphabet,whitespace and -' value="<%- product.sellerName%>" class='update'  required >
 					<input type='file' name='product[image]' value="<%- product.image%>" class='update' title='please only upload the new image if you want to change the previosly added image'>
 					<input type="submit" value="Update Info" id='submit' >
