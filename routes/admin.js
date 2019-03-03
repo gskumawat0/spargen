@@ -7,6 +7,7 @@ let express         = require("express"),
     
 //require models and middleware
 let Product = require("../models/products");
+let Mail    = require("../models/contact");
 let Category = require("../models/category");
 let middleware = require("../middleware/index");
 
@@ -35,57 +36,44 @@ cloudinary.config({
 
 
 
-router.get("/", middleware.isAdmin, function(req, res){
+router.get("/", middleware.isAdmin, async function(req, res){
     var perPage = 8;
     var pageQuery = parseInt(req.query.page, 10);
     var pageNumber = pageQuery ? pageQuery : 1;
     var noMatch = null;
-    if(req.query.search) {
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        Product.find({name: regex}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allProducts) {
-            if(err){
-                req.flash("error",err.message);
-                return res.redirect('back');
+    try{
+        if(req.query.search) {
+            const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            let allProducts =  await Product.find({name: regex}).skip((perPage * pageNumber) - perPage).limit(perPage).exec();
+            let contacts = await Mail.find({});
+            let count = await Product.count({name: regex}).exec();
+            if(allProducts.length < 1) {
+                noMatch = "No products match with your search, please try another combinations.";
             }
-            Product.count({name: regex}).exec(function (err, count) {
-                if (err) {
-                    req.flash('error',err.message);
-                    return res.redirect("back");
-                } else {
-                    if(allProducts.length < 1) {
-                        noMatch = "No products match with your search, please try another combinations.";
-                    }
-                    res.render("admin/admin-product", {
-                        products: allProducts,
-                        current: pageNumber,
-                        pages: Math.ceil(count / perPage),
-                        noMatch: noMatch,
-                        search: req.query.search
-                    });
-                }
+            res.render("admin/admin", {
+                products: allProducts,
+                current: pageNumber,
+                pages: Math.ceil(count / perPage),
+                noMatch: noMatch,
+                search: req.query.search
             });
-        });
-    } else {
-        // get all campgrounds from DB
-        Product.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function (err, allProducts) {
-            if(err){
-                req.flash('error',err.message);
-                return res.redirect('back');
-            }
-            Product.count().exec(function (err, count) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.render("admin/admin-product", {
-                        products: allProducts,
-                        current: pageNumber,
-                        pages: Math.ceil(count / perPage),
-                        noMatch: noMatch,
-                        search: false
-                    });
-                }
+        }
+         else {
+            // get all campgrounds from DB
+            let allProducts = await Product.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec();
+            let count =     Product.count().exec();
+            res.render("admin/admin", {
+                products: allProducts,
+                current: pageNumber,
+                pages: Math.ceil(count / perPage),
+                noMatch: noMatch,
+                search: false
             });
-        });
+        }
+                }
+    catch(err){
+        req.flash('error', err.message);
+        res.redirect('back');
     }
 });
 
@@ -118,6 +106,7 @@ router.post('/category', middleware.isAdmin, upload.single('category[image]'), a
         res.redirect('back');
     }
 });
+
 
 
 

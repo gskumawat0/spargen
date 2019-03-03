@@ -7,7 +7,7 @@ const Product       = require("../models/products"),
       Cart          = require("../models/cart");
 const middleware    = require("../middleware/index");
 
-router.get('/', async function(req, res, next) {
+router.get('/',middleware.isLoggedIn, async function(req, res, next) {
     try{
         let cartItems = await Cart.findById(req.user.cart.id);
                                     // select('items.id').exec();

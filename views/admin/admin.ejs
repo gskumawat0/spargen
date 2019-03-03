@@ -1,0 +1,162 @@
+<% include ../partials/header %>
+<div class='container'>
+	<div class="row">
+		<div class='col-2'>
+			<ul >
+				  <li><a href="#category" class='nav-link'>category</a></li>
+				  <li><a href="#products" class='nav-link' >product</a></li>
+				  <li><a href="#stocks" class='nav-link'> stocks</a></a></li>
+				  <li><a href="#blogs" class='nav-link'>blog</a></li>
+				  <li><a href="#contacts" class='nav-link'>contact</a></li>
+				  <li><a href="#users" class='nav-link'>users</a></li>
+				  <li><a href="#site_details" class='nav-link'>Site Details Manager</a></li>
+			</ul>
+		</div>
+		<div class="col-10">
+			<div id='category' class='py-3'>
+				<div>
+					<h1>Available categoies :</h1>
+					<!--show available categories-->
+				</div>
+				<div class='d-block'>
+					<a class="btn btn-warning" data-toggle="collapse" href="#collapseCategoryForm" role="button" aria-expanded="false" aria-controls="collapseCategoryForm">Add a Category</a>
+				</div>	
+				<form class="form-inline collapse" id="collapseCategoryForm" action="/admin/category" method="post" enctype="multipart/form-data">
+				  <div class="form-group mb-2">
+				    <!--<label for="staticEmail2" class="sr-only">Email</label>-->
+				    <input type="text" class="form-control" name='category[name]'>
+				  </div>
+				  <div class="form-group mx-sm-3 mb-2 d-inline-block">
+				    <!--<label for="inputPassword2" class="sr-only">Password</label>-->
+				    <input type="file" class="form-control-file pb-2" id='category[image]' name='category[image]' placeholder="add a image of category">
+				  </div>
+				  <button type="submit" class="btn btn-primary mb-2 d-inline">Submit Category</button>
+				</form>
+			</div>
+			<hr>
+			<div class="panel panel-warning py-3" id='products'  data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+				<div class="panel-heading">
+					<h2>Product  List</h2>
+					<a href="#collapseProductForm" class='btn btn-warning' data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCategoryForm"> Add a Product</a>
+					<div class="register collapse" id='collapseProductForm'>
+						<!--<div class="container">-->
+							<div class="login-form-grids login-form-admin">
+								<h5 class="animated wow slideInUp" data-wow-delay=".5s"> Add Product Details</h5>
+								<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/products/' enctype="multipart/form-data">
+									<input type="text" placeholder="Category of product..." name='product[category]' title='only contain alphabet,whitespace and -'  required >
+									<input type="text" placeholder="Company of product.." name='product[company]' title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+									<input type="text" placeholder="Model..."  title='only contain alphabet,whitespace and -' name='product[model]'  required >
+									<input type="text" placeholder="Name of Product..." name='product[name]'  required >
+									<input type="number" placeholder='Max Retail Price of Product...' name='product[printed_price]'  required >
+									<input type="number" placeholder="Discounted price of Product..." name='product[discounted_price]'  required >
+									<!--<input type="text" placeholder="Company Verified Product [Y or N]..." name='product[verified]'  required >-->
+									<!--<input type="number" placeholder="quantity" name='product[quantity]'  required >-->
+									<input type="number" placeholder="pin code of seller" name='product[pinCode]'  required >
+									<!--<input type="number" placeholder="delivery time in days" name='product[deliveryTime]'  required >-->
+									<input type="text" placeholder="seller Name..." name='product[sellerName]' title='only contain alphabet,whitespace and -'  required >
+									<input type='file' name='product[image]' id='image' accept='image/*'>
+									<!--<input type="text" placeholder="Description of Product..." name='product[description]'  required >-->
+									<textarea name="product[description]" placeholder='Description of product'id='textarea' cols="30" rows="10"></textarea>	
+									<!--<script> CKEDITOR.replace( 'textarea' ); </script>-->
+									<input type="submit" value="Add a Product" id='submit' >
+								</form>
+							</div>
+							<!--<div class="register-home animated wow slideInUp" data-wow-delay=".5s">-->
+							<!--	<a href="/">Home</a>-->
+							<!--</div>-->
+						<!--</div>-->
+				</div>
+					<div class="panel-ctrls" data-actions-container="" data-action-collapse="{&quot;target&quot;: &quot;.panel-body&quot;}"><span class="button-icon has-bg"><i class="ti ti-angle-down"></i></span></div>
+				</div>
+				<div class="panel-body no-padding">
+					<table class="table table-striped">
+						<thead>
+							<tr class="warning">
+								<th>ProductID</th>
+								<th>Category</th>
+								<th>Name</th>
+								<th>Image</th>
+								<th>Created By</th>
+								<th>Created On</th>
+								<th>Updated On</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+					<% products.forEach((product) =>{ %>
+						<tbody class='px-0'>
+							<tr>
+								<td><%= product._id %></td>
+								<td><%= product.category %></td>
+								<td><a  href='products/<%= product._id  %>' target='_blank'><%= product.name %></a></td>
+								<td><a href='<%= product.image %>' target='_blank'> <img src="<%= product.image %>" alt="<%= product.name %>"></a></td>
+								<td><%= product.uploadedBy.username %></td>
+								<td><%- product.addedOn.toString().split('G')[0] %></td>
+								<td><%= product.updatedOn.toString().split('G')[0] %></td>
+								<td><a href="/products/<%-product._id%>/edit" class='btn btn-warning btn-sm my-2 mx-2 d-block'> Update Me</a> 
+			     <form class='form-inline' action="/products/<%-product._id%>?_method=DELETE" method='post'>
+			       <input type=submit value='Delete Me' class='btn btn-sm btn-danger'>
+			  </form></td>
+							</tr>
+						</tbody>
+					<% }) %>
+					</table>
+				</div>
+			</div>
+			<hr>	
+			<div id="stocks" class='py-3'>
+				<h1>Stocks </h1>
+			</div>
+			<hr>
+			<div id="blogs" class='py-3'>
+				<h1>Blogs</h1>
+			</div>
+			<hr>
+			<div id="contacts" class='py-3'>
+				<h1>Contacts</h1>
+			</div>
+			<hr>
+			<div id="users" class='py-3'>
+				<h1>Users</h1>
+			</div>
+			<hr>
+			<div class='py-3' id="site_details">
+				<h1> Site Dtails Manager</h1>
+				<form>
+				  <div class="form-group">
+				    <label for="exampleFormControlInput1">site logo</label>
+				    <input type="file" class="form-control-file" id="exampleFormControlInput1" placeholder="name@example.com">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlInput1">Email address</label>
+				    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlSelect1">Example select</label>
+				    <select class="form-control" id="exampleFormControlSelect1">
+				      <option>1</option>
+				      <option>2</option>
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				    </select>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlSelect2">Example multiple select</label>
+				    <select multiple class="form-control" id="exampleFormControlSelect2">
+				      <option>1</option>
+				      <option>2</option>
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				    </select>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlTextarea1">Example textarea</label>
+				    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<% include ../partials/footer %>

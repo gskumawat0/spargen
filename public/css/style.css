@@ -2056,6 +2056,9 @@ label.radio {
 	background:#F7F7F9;
 	margin:3em auto 0;
 }
+.login-form-admin{
+	width: 100%;
+}
 .login-form-grids input[type="email"],.login-form-grids input[type="tel"],.login-form-grids input[type="password"],.login-form-grids input[type="text"],.login-form-grids input[type="number"], .login-form-grids input[type="file"], textarea {
 	outline: none;
     border: 1px solid #DBDBDB;

@@ -1,0 +1,157 @@
+/*homepage*/
+
+html,
+body {
+    box-sizing: border-box;
+
+}
+
+ul {
+    list-style: none;
+}
+
+.carousel-item img {
+    height: 85vh;
+}
+
+.collections-promo {
+    background: url(../images/12.jpg) no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    min-height: 520px;
+    padding: 8em 2em 2em;
+}
+
+.collections-promo-text {
+    border: 4px double #212121;
+    padding: 2em;
+    width: 50%;
+    margin-left: 4em;
+}
+
+.collections-promo-text h3 {
+    font-size: 3em;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3em;
+    font-family: 'Cabin', sans-serif;
+}
+
+.collections-promo-text h3 span {
+    display: block;
+    color: #212121;
+}
+
+.newsletter {
+    padding: 2em;
+    background: #F7F7F9;
+    text-align: center;
+}
+
+.newsletter h3 {
+    font-size: 2em;
+    color: #222;
+    margin: 0;
+}
+
+.newsletter p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.8em;
+    margin: .5em 0 2em;
+}
+
+.newsletter form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.newsletter input[type="email"] {
+    outline: none;
+    padding: 10px 10px 10px 10px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #D9D9D9;
+    font-size: 14px;
+    color: #999;
+    width: 74%;
+}
+
+.newsletter input[type="submit"] {
+    outline: none;
+    padding: 10px 0;
+    background: #D8703F;
+    border: none;
+    font-size: 1em;
+    color: #fff;
+    width: 17%;
+    margin-left: 2em;
+}
+
+.newsletter input[type="submit"]:hover {
+    background: #ffc229;
+}
+
+.newsletter form span {
+    left: 1.5em;
+    color: #ffc229;
+    top: 0.1em;
+}
+
+/*footer*/
+
+.fa-phone {
+    transform: rotate(105deg);
+}
+
+.footer-logo {
+    text-align: center;
+    margin: 3em 0;
+}
+
+.footer-logo h2 a {
+    font-size: 2em;
+    color: #575757;
+    text-decoration: none;
+    position: relative;
+}
+
+.footer-logo h2 {
+    position: relative;
+}
+
+.footer-logo h2 a span {
+    display: block;
+    font-size: .2em;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.footer-logo h2:before,
+.footer-logo h2:after {
+    content: '';
+    width: 36%;
+    height: 4px;
+    border-top: 1px solid #575757;
+    border-bottom: 1px solid #575757;
+    position: absolute;
+    top: 60%;
+}
+
+.footer-logo h2:before {
+    left: 0%;
+}
+
+.footer-logo h2:after {
+    right: 0%;
+}
+
+.copy-right p {
+    text-align: center;
+    color: #999;
+    margin: 0;
+    line-height: 1.8em;
+}

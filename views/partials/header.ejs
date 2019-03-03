@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<title>Spargen- spark for the generation</title>
 		<!-- for-mobile-apps -->
@@ -8,26 +9,25 @@
 		<meta name="keywords" content="add our site keywords " />
 		<!-- //for-mobile-apps -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link href="/css/style.css" rel="stylesheet" media="all" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+		<!--<link href="/css/style.css" rel="stylesheet" media="all" />-->
+		<link href="/css/custom.css" rel="stylesheet" media="all" />
 		<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 		<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link href='/images/spargen-logo.jpg' rel='icon'>
 		<!-- js -->
 		<script type="application/x-javascript">
 			addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-				function hideURLbar(){ window.scrollTo(0,1); } 
+
+			function hideURLbar() { window.scrollTo(0, 1); }
 		</script>
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		<script src="/js/script.js"></script>
-		<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+		<!--<script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>-->
 		<script>
-		 new WOW().init();
+			new WOW().init();
 		</script>
-		
+
 		<!-- js -->
 		<!-- cart -->
 		<script src="/js/simpleCart.min.js"></script>
@@ -36,235 +36,88 @@
 		<link rel="stylesheet" href="/css/jquery.countdown.css" />
 		<!-- timer -->
 		<!-- animation-effect -->
-		<link href="/css/animate.min.css" rel="stylesheet"> 
+		<link href="/css/animate.min.css" rel="stylesheet">
 		<script src="/js/wow.min.js"></script>
 		<!-- animation-effect -->
 	</head>
-	
+
 	<body>
 		<!-- flash messsages start-->
-		<div class='container' style='margin-bottom: 0;'>
+		<div class="container">
 			<% if(error && error.length > 0){ %>
-				<div class='alert alert-danger' style='margin-bottom: 0;' role='alert'> <%- error %></div>
-			<% } %>
-			<% if(success && success.length > 0) { %>
-			<div class='alert alert-success' style='margin-bottom: 0;' role='alert'> <%- success %></div>
-			<% } %>
-		</div>	
-		<!--flash messsages end-->
-		<!-- header -->
-		<div class="header">
-			<div class="container">
-				<!--top header start-->
-				<div class="header-grid">
-					<div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
-						<ul>
-							<li><a href="mailto:spargen.official@gmail.com"><i class="fas px-1 fa-envelope fa-2x" aria-hidden="true"></i>spargen.official@gmail.com</a></li>
-							<li><a href="tel:+918890232339"><i class="fas fa-2x px-1  fa-phone" aria-hidden="true"></i>+91 8890232339</a></li>
-		                    <% if(!currentUser){ %>
-		                    	<li><a href="/register"><i class="fas fa-2x px-1 fa-user-plus" aria-hidden = 'true'></i>Register</a></li>
-		                        <li><a href="/login"><i class="fas fa-2x px-1 fa-sign-in-alt" aria-hidden = 'true'></i></i>Login</a></li>
-		                    <% } else { %>
-		                        <li><a href="/profile/<%= currentUser._id %>"><i class="fas fa-user-alt" aria-hidden = 'true'></i> My Account</a></li>
-		                        <li><a href="/logout">Logout</a></li>
-		                    <% } %>
-						</ul>
-					</div> 
-					<div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">
-						<ul class="social-icons">
-							<li><a href="https://www.twitter.com/spargen" target='_blank' class="fa fa-2x fa-twitter"></a></li>
-							<li><a href="https://www.facebook.com/spargen" target='_blank' class="fa fa-2x fa-facebook"></a></li>
-							<li><a href="https://www.instagram.com/spargen" target='_blank' class="fa fa-2x fa-instagram"></a></li>
-							<li><a href="https://www.linkedin.com/company/spargen" target='_blank' class="fa fa-2x fa-linkedin"></a></li>
-						</ul>
-					</div>
-					<div class="clearfix"> </div>
+				<div class='alert alert-danger mb-0' role='alert'>
+					<%- error %>
 				</div>
-				<!--top header end-->
+				<% } %>
+					<% if(success && success.length > 0) { %>
+						<div class='alert alert-success mb-0' role='alert'>
+							<%- success %>
+						</div>
+						<% } %>
+		</div>
+		<!--flash messsages end-->
+		<div class="container">
+			<!--top header start-->
+			<div class="py-1">
+				<div class=" d-inline animated wow slideInLeft" data-wow-delay=".5s">
+					<ul class="d-inline list-unstyled list-inline ">
+						<li class='list-inline-item'><a href="mailto:spargen.official@gmail.com"><i class="fas px-1 fa-envelope " aria-hidden="true"></i>spargen.official@gmail.com</a></li>
+						<li class='list-inline-item'><a href="tel:+918890232339"><i class="fas px-1  fa-phone" aria-hidden="true"></i>+91 8890232339</a></li>
+						<% if(!currentUser){ %>
+							<li class='list-inline-item'><a href="/register"><i class="fas  px-1 fa-user-plus" aria-hidden = 'true'></i>Register</a></li>
+							<li class='list-inline-item'><a href="/login"><i class="fas  px-1 fa-sign-in-alt" aria-hidden = 'true'></i></i>Login</a></li>
+							<% } else { %>
+								<li class='list-inline-item'><a href="/profile/<%= currentUser._id %>"><i class="fas fa-user-alt" aria-hidden = 'true'></i> My Account</a></li>
+								<li class='list-inline-item'><a href="/logout">Logout</a></li>
+								<% } %>
+					</ul>
+				</div>
+				<div class="d-inline float-right animated wow slideInRight" data-wow-delay=".5s">
+					<ul class="d-inline list-unstyled list-inline">
+						<li class='list-inline-item'><a href="https://www.twitter.com/spargen" target='_blank'><i class="fab fa-twitter"></i></a></li>
+						<li class='list-inline-item'><a href="https://www.facebook.com/spargen" target='_blank' class="fab fa-facebook"></a></li>
+						<li class='list-inline-item'><a href="https://www.instagram.com/spargen" target='_blank' class="fab fa-instagram"></a></li>
+						<li class='list-inline-item'><a href="https://www.linkedin.com/company/spargen" target='_blank' class="fab fa-linkedin"></a></li>
+					</ul>
+				</div>
+				<!--<div class="clearfix"> </div>-->
 			</div>
-			<div class=''>
-				<!--nav header start-->
-				<div class="container-fluid">
-					<div class="animated wow zoomIn" data-wow-delay=".5s">
-						<div class="logo-nav">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light">
-							  <a class="navbar-brand" href="/">
+			<!--top header end-->
+		</div>
+		<!--nav header start-->
+		<div class="animated wow zoomIn" data-wow-delay=".5s">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+				<a class="navbar-brand ml-lg-5" href="/">
 							  	SparGen 
 							  </a>
-							  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
 							    <span class="navbar-toggler-icon"></span>
 							  </button>
-							
-							  <div class="collapse navbar-collapse" id="navbarContent">
-							    <ul class="navbar-nav mr-auto">
-							      <li class="nav-item active">
-							        <a class="nav-link pt-1" href="/">Home <span class="sr-only">(current)</span></a>
-							      </li>
-							      <li class="nav-item">
-							        <a class="nav-link pt-1" href="/products">Products</a>
-							      </li>
-							      <li class="nav-item">
-							        <a class="nav-link pt-1" href="/blogs">Blogs</a>
-							      </li>
-							      <li class="nav-item ">
-							        <a class="nav-link pt-1" href="/contact">Contact Us</a>
-							      </li>
-							      <li class="nav-item">
-							        <a class="nav-link pt-1" href="/about">About Us</a>
-							      </li>
-							      <!--<li class="nav-item dropdown">-->
-							      <!--  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-							      <!--    Dropdown-->
-							      <!--  </a>-->
-							      <!--  <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-							      <!--    <a class="dropdown-item" href="#">Action</a>-->
-							      <!--    <a class="dropdown-item" href="#">Another action</a>-->
-							      <!--    <div class="dropdown-divider"></div>-->
-							      <!--    <a class="dropdown-item" href="#">Something else here</a>-->
-							      <!--  </div>-->
-							      <!--</li>-->
-							      <!--<li class="nav-item">-->
-							        <!--<a class="nav-link disabled" href="#">Disabled</a>-->
-							      <!--</li>-->
-							    </ul>
-							    <form class="form-inline my-2 my-lg-0" action='/products/' method= 'get'>
-							      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-							      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							    </form>
-							  </div>
-							</nav>
-							<!--<div class="logo-nav-left animated wow zoomIn" data-wow-delay=".5s">-->
-							<!--	<h1><a href="/">SparGen <span>Best Deals</span></a></h1>-->
-							<!--</div>-->
-							<!--<div class="logo-nav-left1">-->
-							<!--	<nav class="navbar navbar-default">-->
-							<!--	 Brand and toggle get grouped for better mobile display -->
-							<!--		<div class="navbar-header nav_2">-->
-							<!--			<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#toggle-nav">-->
-							<!--				<span class="sr-only">Toggle navigation</span>-->
-							<!--				<span class="icon-bar"></span>-->
-							<!--				<span class="icon-bar"></span>-->
-							<!--				<span class="icon-bar"></span>-->
-							<!--			</button>-->
-							<!--		</div> -->
-							<!--		<div class="collapse navbar-collapse" id="toggle-nav">-->
-							<!--			<ul class="nav navbar-nav">-->
-							<!--				<li class="active"><a href="/" class="act">Home</a></li>	-->
-							<!--				<li class="dropdown">-->
-							<!--					<a href="#" class="dropdown-toggle" data-toggle="dropdown">products<b class="caret"></b></a>-->
-							<!--					<ul class="dropdown-menu multi-column columns-3">-->
-							<!--						<div class="row">-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6>Mi A series</h6>-->
-							<!--									<li><a href="products.html">Mi a1</a></li>-->
-							<!--									<li><a href="products.html">Mi a2</a></li>-->
-							<!--									<li><a href="products.html">Mi a3</a></li>-->
-							<!--									<li><a href="products.html">Mi a4</a></li>-->
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6>Mi Note Series</h6>-->
-							<!--									<li><a href="products.html">Redmi Note 4</a></li>-->
-							<!--									<li><a href="products.html">Redmi Note 5</a></li>-->
-							<!--									<li><a href="products.html">Redmi Note 5 Pro</a></li>-->
-							<!--									<li><a href="products.html">Redmi Note 6</a></li>-->
-														
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6> Mi Max Series</h6></h6>-->
-							<!--									<li><a href="products.html">Mi Max 1</a></li>-->
-							<!--									<li><a href="products.html">Mi Max 2</a></li>-->
-							<!--									<li><a href="products.html">Mi Max 3</a></li>-->
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="clearfix"></div>-->
-							<!--						</div>-->
-							<!--					</ul>-->
-							<!--				</li>-->
-							<!--				<li class="dropdown">-->
-							<!--					<a href="#" class="dropdown-toggle" data-toggle="dropdown">blogs<b class="caret"></b></a>-->
-							<!--					<ul class="dropdown-menu multi-column columns-3">-->
-							<!--						<div class="row">-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6>Samsung Galaxy J series</h6>-->
-							<!--									<li><a href="furniture.html">Samsung J5</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung J6</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung J7</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung J8</a></li>-->
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6>Samsung Galaxy On Series</h6>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy On3</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy On4</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy On5</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy On6</a></li>-->
-															
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="col-sm-4">-->
-							<!--								<ul class="multi-column-dropdown">-->
-							<!--									<h6>Samsung Galaxy Note Series</h6>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy Note 4</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy Note 5</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy Note 6</a></li>-->
-							<!--									<li><a href="furniture.html">Samsung Galaxy Note 7</a></li>-->
-																
-							<!--								</ul>-->
-							<!--							</div>-->
-							<!--							<div class="clearfix"></div>-->
-							<!--						</div>-->
-							<!--					</ul>-->
-							<!--				</li>-->
-							<!--				<li><a href="/about">about us</a></li>-->
-							<!--				<li><a href="/contact">contact us</a></li>-->
-							<!--			</ul>-->
-							<!--		</div>-->
-							<!--	</nav>-->
-							<!--</div>-->
-							<!--<div class="logo-nav-right">-->
-							<!--	<div class="search-box"> -->
-							<!--		<div id="sb-search" class="sb-search">-->
-							<!--			<form method='GET' action='/products/'>-->
-							<!--				<input class="sb-search-input" placeholder="Search Products..." name='search' type="search" id="search">-->
-							<!--				<input class="sb-search-submit" type="submit" value="">-->
-							<!--				<span class="sb-icon-search"> </span>-->
-							<!--			</form>-->
-							<!--		</div>-->
-							<!--	</div>-->
-							<!--	search-scripts -->
-							<!--	<script src="js/classie.js"></script>-->
-							<!--	<script src="js/uisearch.js"></script>-->
-							<!--	<script>-->
-							<!--		new UISearch( document.getElementById( 'sb-search' ) );-->
-							<!--	</script>-->
-							<!--	//search-scripts -->
-							<!--</div>-->
-					<!--<div class="header-right">-->
-					<!--	<div class="cart box_1">-->
-					<!--		<a href="/cart/">-->
-					<!--			<h3> -->
-					<!--				<div class="total">-->
-					<!--					<span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)-->
-					<!--				</div>-->
-									<!--<img src="images/bag.png" alt="" />-->
-					<!--			</h3>-->
-					<!--		</a>-->
-					<!--		<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>-->
-					<!--		<div class="clearfix"> </div>-->
-					<!--	</div>	-->
-					<!--</div>-->
-							<div class="clearfix"> </div>
-						</div>
-					</div>
-				</div>	
-				<!--nav header ends-->
-			</div>
+
+				<div class="collapse navbar-collapse" id="navbarContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item ">
+							<a class="nav-link pt-1" href="/">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link pt-1" href="/products">Products</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link pt-1" href="/blogs">Blogs</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link pt-1" href="/contact">Contact Us</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link pt-1" href="/about">About Us</a>
+						</li>
+					</ul>
+					<form class="form-inline pt-1 mr-lg-5" action='/products/' method='get'>
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
+			<div class="clearfix"> </div>
 		</div>
-		<!-- //header ends -->
+		<!--nav header ends-->

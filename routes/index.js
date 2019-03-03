@@ -133,9 +133,9 @@ router.post('/login',
               var urltoForward = req.session.oldUrl;
               req.session.urltoForward = null;
               res.redirect(urltoForward);
-          } else {
+          } else if(req.user.isAdmin){
             req.flash('success','Nice to see you back'); 
-            res.redirect('/products');
+            res.redirect('/admin');
           }
 });
 

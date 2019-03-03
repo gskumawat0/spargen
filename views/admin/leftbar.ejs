@@ -1,104 +1,104 @@
-    <!-- left side start-->
-		<div class="left-side sticky-left-side">
-		<div class="logo-icon text-center">
-				<a href="index.html"><i class="lnr lnr-home"></i> </a>
-			</div>
+<!-- left side start-->
+<!--<div class="left-side sticky-left-side">-->
+<!--	<div class="logo-icon text-center">-->
+<!--		<a href="index.html"><i class="lnr lnr-home"></i> </a>-->
+<!--	</div>-->
 
-			<!--logo and iconic logo start-->
-			<div class="logo">
-				<h1><a href="#">Amitek Infra</a></h1>
-			</div>
-			<div class="logo-icon text-center">
-				<a href="index.html"><i class="lnr lnr-home"></i> </a>
-			</div>
+	<!--logo and iconic logo start-->
+<!--	<div class="logo">-->
+<!--		<h1><a href="#">Amitek Infra</a></h1>-->
+<!--	</div>-->
+<!--	<div class="logo-icon text-center">-->
+<!--		<a href="index.html"><i class="lnr lnr-home"></i> </a>-->
+<!--	</div>-->
 
-			<!--logo and iconic logo end-->
-			<div class="left-side-inner">
+	<!--logo and iconic logo end-->
+<!--	<div class="left-side-inner">-->
 
-				<!--sidebar nav start-->
-					<ul class="nav nav-pills nav-stacked custom-nav">
-					
-						<li class="<?php if(in_array($this->request->params['controller'],array('Home'))){ echo "active";}?>"><?php echo $this->Html->link('Dashboard', ['controller' => 'Home', 'action' => 'index'], ['class' => 'lnr lnr-home']) ?></li>
-						
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Details'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-cog"></i> <span>Site Details Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Site Details', ['action' => 'edit', 'controller' => 'Details', 1] ) ?> 
-								</li>
-								
-								
-								
-							</ul>
-						</li>
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Categories', 'SubCategories', 'Industries'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-file-empty"></i> <span>Product Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Category', ['action' => 'index', 'controller' => 'Categories'] ) ?> 
-								</li>
-								<li>
-									<?= $this->Html->link('Sub Category', ['action' => 'index', 'controller' => 'SubCategories'] ) ?> 
-								</li>
-								<li>
-									<?= $this->Html->link('Industries', ['action' => 'index', 'controller' => 'Industries'] ) ?> 
-								</li>
-								
-								
-							</ul>
-						</li>
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Services'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-enter"></i> <span>Services Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Services', ['action' => 'index', 'controller' => 'Services'] ) ?> 
-								</li>
-								
-								
-								
-							</ul>
-						</li>
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Blogs'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-paperclip"></i> <span>Blogs Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Blogs', ['action' => 'index', 'controller' => 'Blogs'] ) ?> 
-								</li>
-								
-								
-								
-							</ul>
-						</li>
-						
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Gallery'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-picture"></i> <span>Gallery Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Gallery', ['action' => 'index', 'controller' => 'Gallery'] ) ?> 
-								</li>
-								
-								
-							</ul>
-						</li>
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('ContactUs'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-phone-handset"></i> <span>Contact Us Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Contact Us', ['action' => 'index', 'controller' => 'ContactUs'] ) ?> 
-								</li>
-								
-								
-							</ul>
-						</li>
-						<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Careers'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-users"></i> <span>Career Manager</span></a>
-							<ul class="sub-menu-list">
-								<li>
-									<?= $this->Html->link('Career requests', ['action' => 'index', 'controller' => 'Careers'] ) ?> 
-								</li>
-								
-								
-							</ul>
-						</li>
+		<!--sidebar nav start-->
+<!--			<ul class="nav nav-pills nav-stacked custom-nav">-->
+			
+<!--				<li class="<?php if(in_array($this->request->params['controller'],array('Home'))){ echo "active";}?>"><?php echo $this->Html->link('Dashboard', ['controller' => 'Home', 'action' => 'index'], ['class' => 'lnr lnr-home']) ?></li>-->
+				
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Details'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-cog"></i> <span>Site Details Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Site Details', ['action' => 'edit', 'controller' => 'Details', 1] ) ?> -->
+<!--						</li>-->
 						
 						
-						<li class=""><?= $this->Html->link('Logout', ['action' => 'logout', 'controller' => 'Users'], ['class' => 'lnr lnr-power-switch']) ?></li>						
-					</ul>
-					
-				<!--sidebar nav end-->
-			</div>
-		</div>
-		<!-- left side end-->
+						
+<!--					</ul>-->
+<!--				</li>-->
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Categories', 'SubCategories', 'Industries'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-file-empty"></i> <span>Product Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Category', ['action' => 'index', 'controller' => 'Categories'] ) ?> -->
+<!--						</li>-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Sub Category', ['action' => 'index', 'controller' => 'SubCategories'] ) ?> -->
+<!--						</li>-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Industries', ['action' => 'index', 'controller' => 'Industries'] ) ?> -->
+<!--						</li>-->
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Services'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-enter"></i> <span>Services Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Services', ['action' => 'index', 'controller' => 'Services'] ) ?> -->
+<!--						</li>-->
+						
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Blogs'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-paperclip"></i> <span>Blogs Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Blogs', ['action' => 'index', 'controller' => 'Blogs'] ) ?> -->
+<!--						</li>-->
+						
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+				
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Gallery'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-picture"></i> <span>Gallery Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Gallery', ['action' => 'index', 'controller' => 'Gallery'] ) ?> -->
+<!--						</li>-->
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('ContactUs'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-phone-handset"></i> <span>Contact Us Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Contact Us', ['action' => 'index', 'controller' => 'ContactUs'] ) ?> -->
+<!--						</li>-->
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+<!--				<li class="menu-list <?php if(in_array($this->request->params['controller'],array('Careers'))){ echo "nav-active";}?>"><a href="#"><i class="lnr lnr-users"></i> <span>Career Manager</span></a>-->
+<!--					<ul class="sub-menu-list">-->
+<!--						<li>-->
+<!--							<?= $this->Html->link('Career requests', ['action' => 'index', 'controller' => 'Careers'] ) ?> -->
+<!--						</li>-->
+						
+						
+<!--					</ul>-->
+<!--				</li>-->
+				
+				
+<!--				<li class=""><?= $this->Html->link('Logout', ['action' => 'logout', 'controller' => 'Users'], ['class' => 'lnr lnr-power-switch']) ?></li>						-->
+<!--			</ul>-->
+			
+		<!--sidebar nav end-->
+<!--	</div>-->
+<!--</div>-->
+<!-- left side end-->
