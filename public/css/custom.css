@@ -6,10 +6,6 @@ body {
 
 }
 
-ul {
-    list-style: none;
-}
-
 .carousel-item img {
     height: 85vh;
 }
@@ -109,7 +105,7 @@ ul {
 
 .footer-logo {
     text-align: center;
-    margin: 3em 0;
+    margin: 1em 0;
 }
 
 .footer-logo h2 a {
@@ -154,4 +150,53 @@ ul {
     color: #999;
     margin: 0;
     line-height: 1.8em;
+}
+
+.ad-position {
+    margin: 1em 0 0;
+    position: relative;
+    padding: .5em;
+    background: #F7F7F9;
+}
+
+.ad-position-text {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+}
+
+.ad-position-text h4 {
+    text-transform: uppercase;
+    font-size: 2em;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 1em;
+    position: relative;
+}
+
+.ad-position-text h4:after {
+    content: '';
+    background: #fff;
+    width: 50%;
+    right: 15%;
+    height: 2px;
+    position: absolute;
+    bottom: 0%;
+}
+
+.ad-position-text h5 {
+    margin: 1em 0 0;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 2em;
+    text-align: center;
+}
+
+.ad-position-text h5 span {
+    color: #ffc229;
+    font-weight: 600;
+}
+
+.price {
+    text-decoration: line-through;
 }
