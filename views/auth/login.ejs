@@ -1,23 +1,35 @@
 <% include ../partials/header %>
 
-<!-- register -->
-	<div class="register">
+	<!-- register -->
+	<section class="login">
+		<h1 class="animated wow zoomIn text-center py-3" data-wow-delay=".5s">Welcome Back</h1>
 		<div class="container">
-			<h3 class="animated wow zoomIn" data-wow-delay=".5s">Login Here</h3>
-			<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			<div class="login-form-grids">
-				<form class="animated wow slideInUp" data-wow-delay=".5s" action='/login' method='post'>
-					<input type="email" placeholder="Email Address" name='username' required >
-					<input type="password" placeholder="Password" name='password' required  >
-					<input type="submit" value="Log Me In">
-				</form>
-				<a href='/register'>First time user? register here</a> <br>
-				<a href='/forgot' > Forgot password</a>
+			<div class="row pt-4 pb-3">
+				<div class="col-md-6 mx-auto">
+					<form class="animated wow slideInUp" data-wow-delay=".5s" method='post' action='/login'>
+						<div class="form-group">
+							<label for="username">Username:</label>
+							<input type="text" id='username' name='username' class='form-control' class='form-control' placeholder="username" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Email:</label>
+							<input type="email" placeholder="Email" name='email' id='email' class='form-control' pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" required>
+						</div>
+						<div class="form-group">
+							<label for="password">Password: </label>
+							<input type="password" id='password' name='password' id='password' class='form-control' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class='form-control' placeholder="Password" required>
+							<small class='mb-0'>Forgot password? <a href='/forgot'>Reset here.</a></small>
+						</div>
+						<button class="btn btn-primary my-2 d-block">Submit</button>
+					</form>
+					<p class='mb-0'>Already registered? <a href='/login'>Login here.</a></p>
+				</div>
+
 			</div>
-			<div class="register-home animated wow slideInUp" data-wow-delay=".5s">
-				<a href="/">Home</a>
+			<div class="py-4 animated text-center wow slideInUp" data-wow-delay=".5s">
+				<a href="/" class='px-4 py-2 bg-warning'>Go To Home</a>
 			</div>
+
 		</div>
-	</div>
-<!-- //register -->
-<% include ../partials/footer %>
+	</section>
+	<% include ../partials/footer %>

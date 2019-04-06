@@ -1,42 +1,44 @@
 /*  global $ */
-$(document).ready(function(){
+$(document).ready(function() {
 	//breadcrumb devider
 	// $breadcrumb-divider: quote(">");
 	// password validate
-		$('#password, #confirmPassword').on('keyup', function () {
-			if($('#password').val() !== ''){
-				if ($('#password').val() === $('#confirmPassword').val()) {
-				    $('#message').html('Matched').css('color', 'green');
-				    $('#submit').removeAttr('disabled');
-				    $('#submit').removeAttr('title');
-				  } else{
-					$('#submit').attr('disabled', true);
-					$('#submit').attr('title', "password don't match");
-				    $('#message').html(`password don't match`).css('color', 'red');
-				  }
-			} else {
-				$('#message').html('');
+	$('#password, #confirmPassword').on('keyup', function() {
+		if ($('#password').val() !== '') {
+			if ($('#password').val() === $('#confirmPassword').val()) {
+				$('#message').html('Matched').css('color', 'green');
+				$('#submit').toggleClass('disabled');
+				$('#submit').removeAttr('title');
 			}
-		});
-		
-		
+			else {
+				$('#submit').addClass('disabled');
+				$('#submit').attr('title', "password don't match");
+				$('#message').html(`password don't match`).css('color', 'red');
+			}
+		}
+		else {
+			$('#message').html('');
+		}
+	});
+
+
 	/* ---- Countdown timer ---- */
 
 	// $('#counter').countdown({
-				// 	timestamp : (new Date()).getTime() + 11*24*60*60*1000
-				// });
+	// 	timestamp : (new Date()).getTime() + 11*24*60*60*1000
+	// });
 
 
 	/* ---- Animations ---- */
 
 	$('#links a').hover(
-		function(){ $(this).animate({ left: 3 }, 'fast'); },
-		function(){ $(this).animate({ left: 0 }, 'fast'); }
+		function() { $(this).animate({ left: 3 }, 'fast'); },
+		function() { $(this).animate({ left: 0 }, 'fast'); }
 	);
 
 	$('footer a').hover(
-		function(){ $(this).animate({ top: 3 }, 'fast'); },
-		function(){ $(this).animate({ top: 0 }, 'fast'); }
+		function() { $(this).animate({ top: 3 }, 'fast'); },
+		function() { $(this).animate({ top: 0 }, 'fast'); }
 	);
 
 
@@ -45,7 +47,7 @@ $(document).ready(function(){
 	if (!Modernizr.input.placeholder) {
 		$('.email').val('Input your e-mail address here...');
 		$('.email').focus(function() {
-			if($(this).val() == 'Input your e-mail address here...') {
+			if ($(this).val() == 'Input your e-mail address here...') {
 				$(this).val('');
 			}
 		});
@@ -54,10 +56,10 @@ $(document).ready(function(){
 	// for detecting if the browser is Safari
 	var browser = navigator.userAgent.toLowerCase();
 
-	if(!Modernizr.input.required || (browser.indexOf("safari") != -1 && browser.indexOf("chrome") == -1)) {
+	if (!Modernizr.input.required || (browser.indexOf("safari") != -1 && browser.indexOf("chrome") == -1)) {
 		$('form').submit(function() {
 			$('.popup').remove();
-			if(!$('.email').val() || $('.email').val() == 'Input your e-mail address here...') {
+			if (!$('.email').val() || $('.email').val() == 'Input your e-mail address here...') {
 				$('form').append('<p class="popup">Please fill out this field.</p>');
 				$('.email').focus();
 				return false;

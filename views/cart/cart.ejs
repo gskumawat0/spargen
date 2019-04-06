@@ -1,169 +1,116 @@
 <% include ../partials/header %>
-<!-- breadcrumbs -->
-	<div class="breadcrumbs">
+	<!-- breadcrumbs start -->
+	<nav aria-label="breadcrumb">
 		<div class="container">
-			<ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-				<li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-				<li class="active">cart</li>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Cart</li>
 			</ol>
 		</div>
-	</div>
-<!-- //breadcrumbs -->
-<!--<div class="container">-->
-	<!--price: <%= cart.totalPrice%> || Qty :<%= cart.totalQty%>-->
-<!--	<br>-->
-<!--	<hr>-->
-<!--	//<%= currentUser %>-->
-<!--</div>-->
+	</nav>
+	<!-- breadcrumbs ends-->
 
-<!-- checkout -->
-	<div class="checkout">
+	<!-- cart -->
+	<section class="cart">
 		<div class="container">
-			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains: <span><%- cart.items.length %> products</span></h3>
-			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
-				<table class="timetable_sub">
-					<thead>
+			<h2 class="animated wow slideInLeft py-3" data-wow-delay=".5s">Shopping Cart <span><%- cart.items.length %></span></h2>
+			<div class="table-responsive animated wow slideInUp" data-wow-delay=".5s">
+				<table class='table text-center mb-0 table-hover'>
+					<thead class='thead-dark'>
 						<tr>
-							<th>SL No.</th>	
+							<th>SL No.</th>
 							<th>Product</th>
 							<th>Quantity</th>
 							<th>Product Name</th>
-							<th>Delivery Charges</th>
 							<th>Price</th>
-							<th> total Price</th>
-							<th>Remove</th>
+							<th>Total Price</th>
+							<th>Action</th>
 						</tr>
 					</thead>
-					<% cart.items.forEach((item) => { %>
-					<tr class="rem1">
-						<td class="invert"><%= item.quantity %></td>
-						<td class="invert-image"><a href="products/<%= item.id %>"><img src="<%= item.image %>" alt=" <%= item.name%>" class="img-responsive" /></a></td>
-						<td class="invert">
-							 <div class="quantity"> 
-								<div class="quantity-select">                           
-									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span><%= item.quantity %></span></div>
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-						</td>
-						<td class="invert"><a  href="/products/<%= item.id %>"><%= item.name %></a></td>
-						<td class="invert">$5.00</td>
-						<td class="invert">$ <%= item.price %></td>
-						<td class="invert">$ <%- item.price *  item.quantity %></td>
-						<td class="invert">
-							<div class="rem">
-								<div class="close1"> </div>
-							</div>
-							
-						</td>
-					</tr>
-					<% }) %>
-					<!--<tr class="rem2">-->
-					<!--	<td class="invert">2</td>-->
-					<!--	<td class="invert-image"><a href="single.html"><img src="/images/30.jpg" alt=" " class="img-responsive" /></a></td>-->
-					<!--	<td class="invert">-->
-					<!--		 <div class="quantity"> -->
-					<!--			<div class="quantity-select">                           -->
-					<!--				<div class="entry value-minus">&nbsp;</div>-->
-					<!--				<div class="entry value"><span>1</span></div>-->
-					<!--				<div class="entry value-plus active">&nbsp;</div>-->
-					<!--			</div>-->
-					<!--		</div>-->
-					<!--	</td>-->
-					<!--	<td class="invert">Centre Table</td>-->
-					<!--	<td class="invert">$5.00</td>-->
-					<!--	<td class="invert">$250.00</td>-->
-					<!--	<td class="invert">-->
-					<!--		<div class="rem">-->
-					<!--			<div class="close2"> </div>-->
-					<!--		</div>-->
-					<!--		<script>$(document).ready(function(c) {-->
-					<!--			$('.close2').on('click', function(c){-->
-					<!--				$('.rem2').fadeOut('slow', function(c){-->
-					<!--					$('.rem2').remove();-->
-					<!--				});-->
-					<!--				});	  -->
-					<!--			});-->
-					<!--	   </script>-->
-					<!--	</td>-->
-					<!--</tr>-->
-					<!--<tr class="rem3">-->
-					<!--	<td class="invert">3</td>-->
-					<!--	<td class="invert-image"><a href="single.html"><img src="/images/11.jpg" alt=" " class="img-responsive" /></a></td>-->
-					<!--	<td class="invert">-->
-					<!--		 <div class="quantity"> -->
-					<!--			<div class="quantity-select">                           -->
-					<!--				<div class="entry value-minus">&nbsp;</div>-->
-					<!--				<div class="entry value"><span>1</span></div>-->
-					<!--				<div class="entry value-plus active">&nbsp;</div>-->
-					<!--			</div>-->
-					<!--		</div>-->
-					<!--	</td>-->
-					<!--	<td class="invert">Stone Bangles</td>-->
-					<!--	<td class="invert">$5.00</td>-->
-					<!--	<td class="invert">$299.00</td>-->
-					<!--	<td class="invert">-->
-					<!--		<div class="rem">-->
-					<!--			<div class="close3"> </div>-->
-					<!--		</div>-->
-					<!--		<script>$(document).ready(function(c) {-->
-					<!--			$('.close3').on('click', function(c){-->
-					<!--				$('.rem3').fadeOut('slow', function(c){-->
-					<!--					$('.rem3').remove();-->
-					<!--				});-->
-					<!--				});	  -->
-					<!--			});-->
-					<!--	   </script>-->
-					<!--	</td>-->
-					<!--</tr>-->
-								
+					<tbody>
+						<% cart.items.forEach((item, idx)=>{ %>
+							<tr>
+								<td>
+									<%- idx + 1 %>
+								</td>
+								<td><a href="products/<%= item.id %>"><img src="<%= item.image %>" alt=" <%= item.name%>" class="img-responsive" /></a></td>
+								<td>
+									<div class="quantity-select">
+										<div class="entry value-minus">&nbsp;</div>
+										<div class="entry value"><span><%= item.quantity %></span></div>
+										<div class="entry value-plus active">&nbsp;</div>
+									</div>
+								</td>
+								<td>
+									<a href="/products/<%= item.id %>">
+										<%= item.name %>
+									</a>
+								</td>
+								<td> <i class="fas fa-rupee-sign"></i>
+									<%= item.price %>
+								</td>
+								<td><i class="fas fa-rupee-sign"></i>
+									<%- item.price *  item.quantity %>
+								</td>
+								<td>
+									<i class='fas fa-trash'></i>
+								</td>
+							</tr>
+							<% }) %>
+					</tbody>
 				</table>
-			</div>
-			<div class="checkout-left">	
-				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-					<h4> <a href="/cart/checkout">Continue to basket</a></h4>
-					<ul>
-						<% cart.items.forEach((item,i) => { %>
-						<li><%= item.name %> <i>-</i> <span> <%- item.price * item.quantity %> </span></li>
-						<% }) %>
-						<!--<li>Product2 <i>-</i> <span>$290.00 </span></li>-->
-						<!--<li>Product3 <i>-</i> <span>$299.00 </span></li>-->
-						<li>Total Service Charges <i>-</i> <span>$<%- cart.items.length * 5 %></span></li>
-						<li>Total <i>-</i> <span>$<%= cart.totalPrice %> + $<%- cart.items.length * 5 %> = $<%- cart.totalPrice  + cart.items.length * 5 %>  </span></li>
-					</ul>
+				<hr class='m-0 p-0'>
+				<div class="float-right mr-5">
+					<table>
+						<tr>
+							<td class='text-right'><span class="font-weight-bold"> Subtotal (
+					<%- cart.items.length %> items )</span> :</td>
+							<td>
+								<i class='fas px-2 fa-rupee-sign'></i>
+								<%= cart.totalPrice %>
+							</td>
+						</tr>
+						<tr>
+							<td class='text-right'> Delivery Charges:</td>
+							<td><i class='fas px-2 fa-rupee-sign'></i> 138</td>
+						</tr>
+						<tr>
+							<td>
+								<hr class=' p-0 m-0'>
+							</td>
+							<td>
+								<hr class=' p-0 m-0'>
+							</td>
+						</tr>
+						<tr>
+							<td class='text-right'>Total:</td>
+							<td><i class='fas px-2 fa-rupee-sign'></i> <span class="text-danger"> <%- cart.totalPrice + 138 %></span></td>
+						</tr>
+					</table>
 				</div>
-				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-					<a href="/products"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
-				</div>
-				<div class="clearfix"> </div>
 			</div>
-		</div>
-	</div>
-<!-- //checkout -->
+			<div class="my-3 py-3">
+				<a href="/products" class='bg-warning px-4 py-2'>Continue Shopping</a>
+				<a href="/checkout" class='bg-warning px-4 float-right mr-5  py-2'>Checkout</a>
+			</div>
 
-<!--quantity-->
-<script>
-	$('.value-plus').on('click', function(){
-		var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-		divUpd.text(newVal);
-	});
-	
-	$('.value-minus').on('click', function(){
-		var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-		if(newVal>=1) divUpd.text(newVal);
-	});
-</script>
-<!--quantity-->
-<!--remove btn -->
-<script>
-	$(document).ready(function(c) {
-	$('.close1').on('click', function(c){
-		$('.rem1').fadeOut('slow', function(c){
-			$('.rem1').remove();
-		});
-		});	  
-	});
-</script>
-<!--remove btn-->
-<% include ../partials/footer %>
+		</div>
+	</section>
+	<!-- //checkout -->
+
+	<!--quantity-->
+	<script>
+		// $('.value-plus').on('click', function() {
+		// 	var divUpd = $(this).parent().find('.value'),
+		// 		newVal = parseInt(divUpd.text(), 10) + 1;
+		// 	divUpd.text(newVal);
+		// });
+
+		// $('.value-minus').on('click', function() {
+		// 	var divUpd = $(this).parent().find('.value'),
+		// 		newVal = parseInt(divUpd.text(), 10) - 1;
+		// 	if (newVal >= 1) divUpd.text(newVal);
+		// });
+	</script>
+	<!--quantity-->
+	<% include ../partials/footer %>

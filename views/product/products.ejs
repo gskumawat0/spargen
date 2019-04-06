@@ -3,7 +3,7 @@
 	<nav aria-label="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Products</li>
 			</ol>
 		</div>
@@ -74,7 +74,9 @@
 												<img class="card-img-top img-responsive" src="<%= product.image %>" alt="<%= product.name %> image">
 												<div class="card-body text-center">
 													<h2 class="card-title">
-														<%= product.name %>
+														<a href="/products/<%= product._id %>">
+															<%= product.name %>
+														</a>
 													</h2>
 													<!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
 													<a href="/products/<%= product._id %>" class="btn btn-success px-3 py-2"> view item</a>
@@ -129,7 +131,9 @@
 											<img class="card-img-top img-responsive" src="<%= product.image %>" alt="<%= product.name %> image">
 											<div class="card-body text-center">
 												<h2 class="card-title">
-													<%= product.name %>
+													<a href="/products/<%= product._id %>">
+														<%= product.name %>
+													</a>
 												</h2>
 												<div class="">
 													<p>
